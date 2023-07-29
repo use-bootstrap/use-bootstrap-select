@@ -1,0 +1,7 @@
+{
+  "extends": "@antfu",
+  "rules": {
+    "curly": ["error", "all"]
+  },
+  "ignorePatterns": ["docs"]
+}

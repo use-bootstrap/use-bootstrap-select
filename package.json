@@ -1,0 +1,56 @@
+{
+  "name": "use-bootstrap-select",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Create a select element using the native Bootstrap 5 dropdown UI",
+  "license": "MIT",
+  "repository": "git@github.com:use-bootstrap/use-bootstrap-select.git",
+  "main": "./dist/use-bootstrap-select.mjs",
+  "module": "./dist/use-bootstrap-select.mjs",
+  "types": "./dist/use-bootstrap-select.d.ts",
+  "files": [
+    "dist",
+    "src/style.scss"
+  ],
+  "browserslist": [
+    ">= 0.5%",
+    "last 2 major versions",
+    "not dead",
+    "Chrome >= 60",
+    "Firefox >= 60",
+    "Firefox ESR",
+    "iOS >= 12",
+    "Safari >= 12",
+    "not Explorer <= 11"
+  ],
+  "scripts": {
+    "dev": "rusco dev:*",
+    "dev:js:esm": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.mjs --watch --format=esm",
+    "dev:js:iife": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.js --watch --format=iife",
+    "dev:dts": "tsc -d --emitDeclarationOnly src/index.ts --declarationDir dist --lib esnext,dom --watch",
+    "dev:css": "sass --source-map --embed-sources src/index.scss:dist/use-bootstrap-select.css --watch",
+    "build": "shx rm -rf dist && rusco build:* && shx rm -rf docs/dist && shx cp -R dist docs",
+    "build:js:esm": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.mjs --format=esm --log-level=silent",
+    "build:js:iife": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.js --format=iife --log-level=silent",
+    "build:js:esm:min": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.min.mjs --minify --mangle-props=^_ --format=esm --log-level=silent",
+    "build:js:iife:min": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.min.js --minify --mangle-props=^_ --format=iife --log-level=silent",
+    "build:dts": "tsc -d --emitDeclarationOnly src/index.ts --outFile dist/use-bootstrap-select.d.ts --lib esnext,dom",
+    "build:css": "sass --source-map --embed-sources src/index.scss:dist/use-bootstrap-select.css && postcss dist/use-bootstrap-select.css --use autoprefixer --map --replace && esbuild dist/use-bootstrap-select.css --minify --outfile=dist/use-bootstrap-select.min.css --log-level=silent",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "0.39.8",
+    "@types/bootstrap": "5.2.6",
+    "autoprefixer": "10.4.14",
+    "bootstrap": "5.3.1",
+    "esbuild": "0.18.17",
+    "eslint": "8.46.0",
+    "postcss": "8.4.27",
+    "postcss-cli": "10.1.0",
+    "rusco": "0.1.0",
+    "sass": "1.64.1",
+    "shx": "0.3.4",
+    "typescript": "5.1.6"
+  }
+}

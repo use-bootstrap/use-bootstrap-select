@@ -1,0 +1,43 @@
+<select class="form-select" id="example1">
+	<option value="">Choose browser</option>
+	<option value="chrome">Chrome</option>
+	<option value="edge">Edge</option>
+	<option value="firefox">Firefox</option>
+	<option value="opera">Opera</option>
+	<option value="safari">Safari</option>
+</select>
+<button class="btn btn-sm btn-light" type="button" id="setValue1">setValue('firefox')</button>
+<button class="btn btn-sm btn-light" type="button" id="getValue1">getValue()</button>
+
+<script>
+	const example1 = new UseBootstrapSelect(document.getElementById('example1'))
+	document.getElementById('setValue1').addEventListener('click', () => {
+		example1.setValue('firefox')
+	})
+	document.getElementById('getValue1').addEventListener('click', () => {
+		alert(example1.getValue())
+	})
+</script>
+
+<!-- ========================================================================================================== -->
+
+<select class="form-select" id="example2" multiple>
+	<option value="">Choose browser</option>
+	<option selected value="chrome">Chrome</option>
+	<option value="edge">Edge</option>
+	<option selected value="firefox">Firefox</option>
+	<option value="opera">Opera</option>
+	<option value="safari">Safari</option>
+</select>
+<button class="btn btn-sm btn-light" type="button" id="removeValue">removeValue('firefox')</button>
+<button class="btn btn-sm btn-light" type="button" id="getValue2">getValue()</button>
+
+<script>
+	const example2 = new UseBootstrapSelect(document.getElementById('example2'))
+	document.getElementById('removeValue').addEventListener('click', () => {
+		example2.removeValue('firefox')
+	})
+	document.getElementById('getValue2').addEventListener('click', () => {
+		alert(JSON.stringify(example2.getValue()))
+	})
+</script>
