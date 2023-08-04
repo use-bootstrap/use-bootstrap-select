@@ -40,7 +40,7 @@
     "dev:js:iife": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.js --watch --format=iife",
     "dev:dts": "tsc -d --emitDeclarationOnly src/index.ts --declarationDir dist --lib esnext,dom --watch",
     "dev:css": "sass --source-map --embed-sources src/index.scss:dist/use-bootstrap-select.css --watch",
-    "build": "shx rm -rf dist && rusco build:* && shx rm -rf docs/dist && shx cp -R dist/*.min.{css,js} docs",
+    "build": "shx rm -rf dist && rusco build:* && shx cp dist/*.min.{css,js} docs",
     "build:js:esm": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.mjs --format=esm --log-level=silent",
     "build:js:iife": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.js --format=iife --log-level=silent",
     "build:js:esm:min": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.min.mjs --minify --mangle-props=^_ --format=esm --log-level=silent",

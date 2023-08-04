@@ -1,62 +1,81 @@
-<!doctype html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Create a select element using the native Bootstrap 5 dropdown UI" />
-    <meta name="keywords" content="bootstrap, bootstrap5, select, select2, chosen, choices, bootstrap-select" />
+    <meta name="keywords" content="bootstrap select, bootstrap select2, dropdown select, bootstrap dropdown, bootstrap5" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.1/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="dist/use-bootstrap-select.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@fontsource/inter@5.0.5/latin.css" />
+    <link rel="stylesheet" href="/bootstrap.min.css" />
+    <link rel="stylesheet" href="/use-bootstrap-select.min.css" />
+    <link rel="stylesheet" href="/prism-tomorrow.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&amp;display=swap" />
     <title>use-bootstrap-select | Create a select element using the native Bootstrap 5 dropdown UI</title>
     <style>
+      [data-bs-theme='light'] #bs-theme-light {
+        display: none;
+      }
+      [data-bs-theme='dark'] #bs-theme-dark {
+        display: none;
+      }
       body {
-        font-family: 'Inter';
+        font-family: 'Hind Siliguri', sans-serif;
+      }
+      pre[class*='language-'] {
+        font-size: 0.875rem;
+        border-radius: var(--bs-border-radius);
+        background: #2b3035;
+        margin: 0;
+        margin-bottom: 2rem;
       }
     </style>
   </head>
-
-  <body class="bg-lights position-relative" data-bs-spy="scroll" data-bs-target="#list-example">
-    <div class="container my-5 position-relative" id="container" style="max-width: calc(720px + 1rem)">
-      <div class="d-flex align-items-center gap-1 mb-3">
-        <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <h2 class="mb-0">use-bootstrap-select</h2>
-        <small>v0.0.2</small>
-      </div>
-      <p class="text-body-secondary">Create a select element using the native Bootstrap 5 dropdown UI.</p>
-      <p>
-        <a href="https://github.com/use-bootstrap/use-bootstrap-select" target="_blank" class="link-body-emphasis text-decoration-none d-flex align-items-center gap-1">
-          <svg viewBox="0 0 24 24" width="21" height="21" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-          </svg>
-          Github
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+      <div class="container justify-content-start">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h360c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H184V184h656v320c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V144c0-17.7-14.3-32-32-32zM653.3 599.4l52.2-52.2a8.01 8.01 0 0 0-4.7-13.6l-179.4-21c-5.1-.6-9.5 3.7-8.9 8.9l21 179.4c.8 6.6 8.9 9.4 13.6 4.7l52.4-52.4 256.2 256.2c3.1 3.1 8.2 3.1 11.3 0l42.4-42.4c3.1-3.1 3.1-8.2 0-11.3L653.3 599.4z"></path></svg>
+          use-bootstrap-select
         </a>
-      </p>
-      <div class="form-check form-switch mb-5">
-        <input class="form-check-input" type="checkbox" role="switch" id="swithDark" />
-        <label class="form-check-label" for="swithDark">Dark</label>
+        <small class="small">v0.0.3</small>
+        <div class="ms-auto d-flex align-items-center gap-3">
+          <a class="fs-5 link-body-emphasis" href="https://github.com/use-bootstrap/use-bootstrap-select" target="_blank">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+          </a>
+          <div>
+            <input type="checkbox" class="btn-check" id="bs-theme" autocomplete="off" />
+            <label class="btn p-0 border-0 fs-5" for="bs-theme" id="bs-theme-dark" data-bs-toggle="tooltip" data-bs-offset="0,15" title="Toggle dark mode">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </label>
+            <label class="btn p-0 border-0 fs-5" for="bs-theme" id="bs-theme-light" data-bs-toggle="tooltip" data-bs-offset="0,15" title="Toggle light mode">
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </label>
+          </div>
+        </div>
       </div>
+    </nav>
+    <div class="container py-3">
+      <p class="text-body-secondary">Create a select element using the native Bootstrap 5 dropdown UI</p>
       <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#features-tab-pane" type="button" role="tab" aria-controls="features-tab-pane" aria-selected="true">Features</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="installation-tab" data-bs-toggle="tab" data-bs-target="#installation-tab-pane" type="button" role="tab" aria-controls="installation-tab-pane" aria-selected="false">Installation</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="example-tab" data-bs-toggle="tab" data-bs-target="#example-tab-pane" type="button" role="tab" aria-controls="example-tab-pane" aria-selected="false">Example</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="methods-tab" data-bs-toggle="tab" data-bs-target="#methods-tab-pane" type="button" role="tab" aria-controls="methods-tab-pane" aria-selected="false">Methods</button>
-        </li>
+        <li class="nav-item" role="presentation"><button class="nav-link active" id="features-tab" data-bs-toggle="tab" data-bs-target="#features-tab-pane" type="button" role="tab" aria-controls="features-tab-pane" aria-selected="true">Features</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="installation-tab" data-bs-toggle="tab" data-bs-target="#installation-tab-pane" type="button" role="tab" aria-controls="installation-tab-pane" aria-selected="false">Installation</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="example-tab" data-bs-toggle="tab" data-bs-target="#example-tab-pane" type="button" role="tab" aria-controls="example-tab-pane" aria-selected="false">Example</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="methods-tab" data-bs-toggle="tab" data-bs-target="#methods-tab-pane" type="button" role="tab" aria-controls="methods-tab-pane" aria-selected="false">Methods</button></li>
       </ul>
-      <div class="tab-content" id="myTabContent">
+      <div class="tab-content">
         <div class="tab-pane pt-4 show active" id="features-tab-pane" role="tabpanel" aria-labelledby="features-tab" tabindex="0">
-          <h2 class="fw-bold" id="features">Features</h2>
+          <h2 class="fw-bold">Features</h2>
           <ul class="text-body-secondary">
             <li>
               <b>Placeholder</b>
@@ -84,27 +103,26 @@
             </li>
             <li>
               <b>Validation</b>
-              : Reflects validation states visually to align with Bootstrap's form validation feedback.
+              : Reflects validation states visually to align with Bootstrap&#x27;s form validation feedback.
             </li>
           </ul>
         </div>
-        <div class="tab-pane pt-4" id="installation-tab-pane" role="tabpanel" aria-labelledby="installation" tabindex="0">
-          <h2 class="fw-bold" id="installation">Installation</h2>
-          <p class="text-body-secondary">Install use-bootstrap-select from npm:</p>
-          <pre><code class="language-bash">npm install use-bootstrap-select</code></pre>
-        </div>
-        <div class="tab-pane pt-4" id="example-tab-pane" role="tabpanel" aria-labelledby="example-tab" tabindex="0">
-          <h2 class="fw-bold" id="usage">Usage/Examples</h2>
-          <p class="text-body-secondary">After installation, you can import the library into your project as follows:</p>
-          <pre><code class="language-javascript">import 'use-bootstrap-select/dist/use-bootstrap-select.css'
-import { UseBootstrapSelect } from 'use-bootstrap-select'</code></pre>
-      <p class="text-body-secondary mt-5">or, since it also comes with an IIFE bundle, you can insert it directly into your HTML:</p>
-      <pre><code class="language-html">&lt;!doctype html&gt;
+        <div class="tab-pane pt-4" id="installation-tab-pane" role="tabpanel" aria-labelledby="installation-tab" tabindex="0">
+          <h2 class="fw-bold">Installation</h2>
+          <p>Install from npm:</p>
+          <pre><code class="language-bash">npm install use-bootstrap-select
+</code></pre>
+          <p>After installation, you can import the library into your project as follows:</p>
+          <pre><code class="language-javascript">import &#x27;use-bootstrap-select/dist/use-bootstrap-select.css&#x27;
+import { UseBootstrapSelect } from &#x27;use-bootstrap-select&#x27;
+</code></pre>
+          <p>or, since it also comes with an IIFE bundle, you can insert it directly into your HTML:</p>
+          <pre><code class="language-html">&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
   &lt;head&gt;
     &lt;meta charset=&quot;utf-8&quot;&gt;
     &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-    &lt;title&gt;Bootstrap demo&lt;/title&gt;
+    &lt;title&gt;Use Bootstrap Select Demo&lt;/title&gt;
     &lt;link href=&quot;https://unpkg.com/bootstrap@5.3.1/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
     &lt;link href=&quot;node_modules/use-bootstrap-select/dist/use-bootstrap-select.min.css&quot; rel=&quot;stylesheet&quot;&gt;
   &lt;/head&gt;
@@ -120,282 +138,632 @@ import { UseBootstrapSelect } from 'use-bootstrap-select'</code></pre>
     &lt;script src=&quot;https://unpkg.com/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
     &lt;script src=&quot;node_modules/use-bootstrap-select/dist/use-bootstrap-select.min.js&quot;&gt;&lt;/script&gt;
   &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-          <p class="mt-5">Once you imported the library, you can initiate it:</p>
-          <pre><code class="language-javascript">const example = new UseBootstrapSelect(document.getElementById('example'))</code></pre>
-
-          <h4 class="fw-bold mt-5 pt-5">Examples:</h4>
-
-          <div style="max-width: 350px" class="row row-cols-1 g-5 mt-0">
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">1. Basic</h6>
-                <button data-code="code/basic.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <select class="form-select">
-                <option value="chrome">Chrome</option>
-                <option value="edge">Edge</option>
-                <option value="firefox">Firefox</option>
-                <option value="opera">Opera</option>
-                <option value="safari">Safari</option>
-              </select>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">2. Using Placeholder</h6>
-                <button data-code="code/placeholder.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <select class="form-select">
-                <option value="">Choose browser</option>
-                <option value="chrome">Chrome</option>
-                <option value="edge">Edge</option>
-                <option value="firefox">Firefox</option>
-                <option value="opera">Opera</option>
-                <option value="safari">Safari</option>
-              </select>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">3. Using Optgroup</h6>
-                <button data-code="code/optgroup.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <select class="form-select">
-                <optgroup label="Theropods">
-                  <option>Tyrannosaurus</option>
-                  <option>Velociraptor</option>
-                  <option>Deinonychus</option>
-                </optgroup>
-                <optgroup label="Sauropods">
-                  <option>Diplodocus</option>
-                  <option>Saltasaurus</option>
-                  <option>Apatosaurus</option>
-                </optgroup>
-              </select>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">4. Multiple</h6>
-                <button data-code="code/multiple.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <select class="form-select" multiple>
-                <option value="">Choose browser</option>
-                <option selected value="chrome">Chrome</option>
-                <option value="edge">Edge</option>
-                <option selected value="firefox">Firefox</option>
-                <option value="opera">Opera</option>
-                <option value="safari">Safari</option>
-              </select>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">5. Clearable</h6>
-                <button data-code="code/clearable.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <select class="form-select" data-ub-select-clear>
-                <option value="">Choose browser</option>
-                <option selected value="chrome">Chrome</option>
-                <option value="edge">Edge</option>
-                <option value="firefox">Firefox</option>
-                <option value="opera">Opera</option>
-                <option value="safari">Safari</option>
-              </select>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">6. Search</h6>
-                <button data-code="code/search.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <select class="form-select" data-ub-select-search>
-                <option value="">Choose browser</option>
-                <option value="chrome">Chrome</option>
-                <option value="edge">Edge</option>
-                <option value="firefox">Firefox</option>
-                <option value="opera">Opera</option>
-                <option value="safari">Safari</option>
-              </select>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">7. Creatable</h6>
-                <button data-code="code/creatable.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <select class="form-select" data-ub-select-search data-ub-select-create>
-                <option value="">Choose browser</option>
-                <option value="chrome">Chrome</option>
-                <option value="edge">Edge</option>
-                <option value="firefox">Firefox</option>
-                <option value="opera">Opera</option>
-                <option value="safari">Safari</option>
-              </select>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">8. Disabled</h6>
-                <button data-code="code/disabled.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <div class="vstack gap-2">
-                <select class="form-select" disabled>
-                  <option value="">Choose browser</option>
-                  <option value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-                <select class="form-select" multiple disabled>
-                  <option value="">Choose browser</option>
-                  <option selected value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option selected value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">9. Disabled option</h6>
-                <button data-code="code/disabled-options.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <select class="form-select">
-                <option value="">Choose browser</option>
-                <option value="chrome">Chrome</option>
-                <option value="edge">Edge</option>
-                <option value="firefox">Firefox</option>
-                <option disabled value="opera">Opera</option>
-                <option disabled value="safari">Safari</option>
-              </select>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">10. Sizing</h6>
-                <button data-code="code/sizing.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <div class="vstack gap-2">
-                <select class="form-select form-select-sm" data-ub-select-clear>
-                  <option value="">Choose browser</option>
-                  <option value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-                <select multiple class="form-select form-select-sm" data-ub-select-clear>
-                  <option value="">Choose browser</option>
-                  <option selected value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option selected value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-                <select class="form-select" data-ub-select-clear>
-                  <option value="">Choose browser</option>
-                  <option value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-                <select multiple class="form-select" data-ub-select-clear>
-                  <option value="">Choose browser</option>
-                  <option selected value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option selected value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-                <select class="form-select form-select-lg" data-ub-select-clear>
-                  <option value="">Choose browser</option>
-                  <option value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-                <select multiple class="form-select form-select-lg" data-ub-select-clear>
-                  <option value="">Choose browser</option>
-                  <option selected value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option selected value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">11. Validation</h6>
-                <button data-code="code/validation.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <form class="needs-validation vstack gap-3" novalidate>
-                <div>
-                  <select class="form-select" data-ub-select-clear required>
-                    <option value="">Choose browser</option>
-                    <option value="chrome">Chrome</option>
-                    <option value="edge">Edge</option>
-                    <option value="firefox">Firefox</option>
-                    <option value="opera">Opera</option>
-                    <option value="safari">Safari</option>
-                  </select>
-                  <div class="invalid-feedback">This field is required.</div>
-                  <div class="valid-feedback">Good choice.</div>
+&lt;/html&gt;
+</code></pre>
+        </div>
+        <div class="tab-pane pt-4" id="example-tab-pane" role="tabpanel" aria-labelledby="example-tab" tabindex="0">
+          <h2 class="fw-bold mb-4">Example</h2>
+          <div class="row g-5" id="masonry-row">
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="basic-preview-tab" data-bs-toggle="tab" data-bs-target="#basic-preview-tab-pane" type="button" role="tab" aria-controls="basic-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="basic-code-tab" data-bs-toggle="tab" data-bs-target="#basic-code-tab-pane" type="button" role="tab" aria-controls="basic-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
                 </div>
-                <div>
-                  <select class="form-select" multiple required>
-                    <option value="">Choose browser</option>
-                    <option value="chrome">Chrome</option>
-                    <option value="edge">Edge</option>
-                    <option value="firefox">Firefox</option>
-                    <option value="opera">Opera</option>
-                    <option value="safari">Safari</option>
-                  </select>
-                  <div class="invalid-feedback">This field is required.</div>
-                  <div class="valid-feedback">Good choice.</div>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-            </div>
+                <div class="card-body">
+                  <h5 class="card-title">Basic</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="basic-preview-tab-pane" role="tabpanel" aria-labelledby="basic-preview-tab" tabindex="0">
+                      <select class="form-select">
+                        <option value="chrome">Chrome</option>
+                        <option value="edge">Edge</option>
+                        <option value="firefox">Firefox</option>
+                        <option value="opera">Opera</option>
+                        <option value="safari">Safari</option>
+                      </select>
+                    </div>
+                    <div class="tab-pane" id="basic-code-tab-pane" role="tabpanel" aria-labelledby="basic-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;select class=&quot;form-select&quot; id=&quot;example-basic&quot;&gt;
+  &lt;option value=&quot;chrome&quot;&gt;Chrome&lt;/option&gt;
+  &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+  &lt;option value=&quot;firefox&quot;&gt;Firefox&lt;/option&gt;
+  &lt;option value=&quot;opera&quot;&gt;Opera&lt;/option&gt;
+  &lt;option value=&quot;safari&quot;&gt;Safari&lt;/option&gt;
+&lt;/select&gt;
 
-            <div class="col">
-              <div class="d-flex align-items-center justify-content-between mb-3">
-                <h6 class="mb-0 small fw-bold">12. Methods</h6>
-                <button data-code="code/methods.html" type="button" title="View source" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#sourceCodeModal">&lt;/&gt;</button>
-              </div>
-              <div class="vstack gap-3">
-                <select class="form-select" id="example1">
-                  <option value="">Choose browser</option>
-                  <option value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-                <div class="hstack gap-3 flex-wrap">
-                  <button class="btn btn-sm btn-secondary" type="button" id="setValue1"><code class="text-white">setValue('firefox')</code></button>
-                  <button class="btn btn-sm btn-secondary" type="button" id="getValue1"><code class="text-white">getValue()</code></button>
+&lt;script&gt;
+  new UseBootstrapSelect(document.getElementById(&#x27;example-basic&#x27;))
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
                 </div>
-                <hr />
-                <select class="form-select" id="example2" multiple>
-                  <option value="">Choose browser</option>
-                  <option selected value="chrome">Chrome</option>
-                  <option value="edge">Edge</option>
-                  <option selected value="firefox">Firefox</option>
-                  <option value="opera">Opera</option>
-                  <option value="safari">Safari</option>
-                </select>
-                <div class="hstack gap-3 flex-wrap">
-                  <button class="btn btn-sm btn-secondary" type="button" id="removeValue"><code class="text-white">removeValue('firefox')</code></button>
-                  <button class="btn btn-sm btn-secondary" type="button" id="getValue2"><code class="text-white">getValue()</code></button>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="placeholder-preview-tab" data-bs-toggle="tab" data-bs-target="#placeholder-preview-tab-pane" type="button" role="tab" aria-controls="placeholder-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="placeholder-code-tab" data-bs-toggle="tab" data-bs-target="#placeholder-code-tab-pane" type="button" role="tab" aria-controls="placeholder-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Placeholder</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="placeholder-preview-tab-pane" role="tabpanel" aria-labelledby="placeholder-preview-tab" tabindex="0">
+                      <select class="form-select">
+                        <option value="">Choose browser</option>
+                        <option value="chrome">Chrome</option>
+                        <option value="edge">Edge</option>
+                        <option value="firefox">Firefox</option>
+                        <option value="opera">Opera</option>
+                        <option value="safari">Safari</option>
+                      </select>
+                    </div>
+                    <div class="tab-pane" id="placeholder-code-tab-pane" role="tabpanel" aria-labelledby="placeholder-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;select class=&quot;form-select&quot; id=&quot;example-placeholder&quot;&gt;
+  &lt;option value=&quot;&quot;&gt;Choose browser&lt;/option&gt; &lt;!-- use an option with an empty value as a placeholder --&gt;
+  &lt;option value=&quot;chrome&quot;&gt;Chrome&lt;/option&gt;
+  &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+  &lt;option value=&quot;firefox&quot;&gt;Firefox&lt;/option&gt;
+  &lt;option value=&quot;opera&quot;&gt;Opera&lt;/option&gt;
+  &lt;option value=&quot;safari&quot;&gt;Safari&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+  new UseBootstrapSelect(document.getElementById(&#x27;example-placeholder&#x27;))
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="optgroup-preview-tab" data-bs-toggle="tab" data-bs-target="#optgroup-preview-tab-pane" type="button" role="tab" aria-controls="optgroup-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="optgroup-code-tab" data-bs-toggle="tab" data-bs-target="#optgroup-code-tab-pane" type="button" role="tab" aria-controls="optgroup-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Optgroup</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="optgroup-preview-tab-pane" role="tabpanel" aria-labelledby="optgroup-preview-tab" tabindex="0">
+                      <select class="form-select">
+                        <optgroup label="Theropods">
+                          <option>Tyrannosaurus</option>
+                          <option>Velociraptor</option>
+                          <option>Deinonychus</option>
+                        </optgroup>
+                        <optgroup label="Sauropods">
+                          <option>Diplodocus</option>
+                          <option>Saltasaurus</option>
+                          <option>Apatosaurus</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                    <div class="tab-pane" id="optgroup-code-tab-pane" role="tabpanel" aria-labelledby="optgroup-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;select class=&quot;form-select&quot; id=&quot;example-optgroup&quot;&gt;
+  &lt;optgroup label=&quot;Theropods&quot;&gt;
+    &lt;option&gt;Tyrannosaurus&lt;/option&gt;
+    &lt;option&gt;Velociraptor&lt;/option&gt;
+    &lt;option&gt;Deinonychus&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label=&quot;Sauropods&quot;&gt;
+    &lt;option&gt;Diplodocus&lt;/option&gt;
+    &lt;option&gt;Saltasaurus&lt;/option&gt;
+    &lt;option&gt;Apatosaurus&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+  new UseBootstrapSelect(document.getElementById(&#x27;example-optgroup&#x27;))
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="multiple-preview-tab" data-bs-toggle="tab" data-bs-target="#multiple-preview-tab-pane" type="button" role="tab" aria-controls="multiple-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="multiple-code-tab" data-bs-toggle="tab" data-bs-target="#multiple-code-tab-pane" type="button" role="tab" aria-controls="multiple-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Multiple</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="multiple-preview-tab-pane" role="tabpanel" aria-labelledby="multiple-preview-tab" tabindex="0">
+                      <select class="form-select" multiple="">
+                        <option value="">Choose browser</option>
+                        <option value="chrome" selected="">Chrome</option>
+                        <option value="edge">Edge</option>
+                        <option value="firefox" selected="">Firefox</option>
+                        <option value="opera">Opera</option>
+                        <option value="safari">Safari</option>
+                      </select>
+                    </div>
+                    <div class="tab-pane" id="multiple-code-tab-pane" role="tabpanel" aria-labelledby="multiple-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;select class=&quot;form-select&quot; id=&quot;example-multiple&quot; multiple&gt;
+  &lt;option value=&quot;&quot;&gt;Choose browser&lt;/option&gt;
+  &lt;option value=&quot;chrome&quot; selected&gt;Chrome&lt;/option&gt;
+  &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+  &lt;option value=&quot;firefox&quot; selected&gt;Firefox&lt;/option&gt;
+  &lt;option value=&quot;opera&quot;&gt;Opera&lt;/option&gt;
+  &lt;option value=&quot;safari&quot;&gt;Safari&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+  new UseBootstrapSelect(document.getElementById(&#x27;example-multiple&#x27;))
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="clearable-preview-tab" data-bs-toggle="tab" data-bs-target="#clearable-preview-tab-pane" type="button" role="tab" aria-controls="clearable-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="clearable-code-tab" data-bs-toggle="tab" data-bs-target="#clearable-code-tab-pane" type="button" role="tab" aria-controls="clearable-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Clearable</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="clearable-preview-tab-pane" role="tabpanel" aria-labelledby="clearable-preview-tab" tabindex="0">
+                      <select class="form-select" data-ub-select-clear="true">
+                        <option value="">Choose browser</option>
+                        <option value="chrome" selected="">Chrome</option>
+                        <option value="edge">Edge</option>
+                        <option value="firefox">Firefox</option>
+                        <option value="opera">Opera</option>
+                        <option value="safari">Safari</option>
+                      </select>
+                    </div>
+                    <div class="tab-pane" id="clearable-code-tab-pane" role="tabpanel" aria-labelledby="clearable-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;!-- Using data-ub-select-clear attribute: --&gt;
+&lt;select class=&quot;form-select&quot; id=&quot;example-clearable&quot; data-ub-select-clear&gt;
+  &lt;option value=&quot;&quot;&gt;Choose browser&lt;/option&gt;
+  &lt;option value=&quot;chrome&quot; selected&gt;Chrome&lt;/option&gt;
+  &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+  &lt;option value=&quot;firefox&quot;&gt;Firefox&lt;/option&gt;
+  &lt;option value=&quot;opera&quot;&gt;Opera&lt;/option&gt;
+  &lt;option value=&quot;safari&quot;&gt;Safari&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+  new UseBootstrapSelect(document.getElementById(&#x27;example-clearable&#x27;))
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="search-preview-tab" data-bs-toggle="tab" data-bs-target="#search-preview-tab-pane" type="button" role="tab" aria-controls="search-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="search-code-tab" data-bs-toggle="tab" data-bs-target="#search-code-tab-pane" type="button" role="tab" aria-controls="search-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Search</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="search-preview-tab-pane" role="tabpanel" aria-labelledby="search-preview-tab" tabindex="0">
+                      <select class="form-select" data-ub-select-search="true">
+                        <option value="">Choose browser</option>
+                        <option value="chrome">Chrome</option>
+                        <option value="edge">Edge</option>
+                        <option value="firefox">Firefox</option>
+                        <option value="opera">Opera</option>
+                        <option value="safari">Safari</option>
+                      </select>
+                    </div>
+                    <div class="tab-pane" id="search-code-tab-pane" role="tabpanel" aria-labelledby="search-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;!-- Using data-ub-select-search attribute: --&gt;
+&lt;select class=&quot;form-select&quot; id=&quot;example-search&quot; data-ub-select-search&gt;
+  &lt;option value=&quot;&quot;&gt;Choose browser&lt;/option&gt;
+  &lt;option value=&quot;chrome&quot;&gt;Chrome&lt;/option&gt;
+  &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+  &lt;option value=&quot;firefox&quot;&gt;Firefox&lt;/option&gt;
+  &lt;option value=&quot;opera&quot;&gt;Opera&lt;/option&gt;
+  &lt;option value=&quot;safari&quot;&gt;Safari&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+  new UseBootstrapSelect(document.getElementById(&#x27;example-search&#x27;))
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="creatable-preview-tab" data-bs-toggle="tab" data-bs-target="#creatable-preview-tab-pane" type="button" role="tab" aria-controls="creatable-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="creatable-code-tab" data-bs-toggle="tab" data-bs-target="#creatable-code-tab-pane" type="button" role="tab" aria-controls="creatable-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Creatable</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="creatable-preview-tab-pane" role="tabpanel" aria-labelledby="creatable-preview-tab" tabindex="0">
+                      <select class="form-select" data-ub-select-search="true" data-ub-select-create="true">
+                        <option value="">Choose browser</option>
+                        <option value="chrome">Chrome</option>
+                        <option value="edge">Edge</option>
+                        <option value="firefox">Firefox</option>
+                        <option value="opera">Opera</option>
+                        <option value="safari">Safari</option>
+                      </select>
+                    </div>
+                    <div class="tab-pane" id="creatable-code-tab-pane" role="tabpanel" aria-labelledby="creatable-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;!-- Using data-ub-select-create attribute: --&gt;
+&lt;select class=&quot;form-select&quot; id=&quot;example-creatable&quot; data-ub-select-search data-ub-select-create&gt;
+  &lt;option value=&quot;&quot;&gt;Choose browser&lt;/option&gt;
+  &lt;option value=&quot;chrome&quot;&gt;Chrome&lt;/option&gt;
+  &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+  &lt;option value=&quot;firefox&quot;&gt;Firefox&lt;/option&gt;
+  &lt;option value=&quot;opera&quot;&gt;Opera&lt;/option&gt;
+  &lt;option value=&quot;safari&quot;&gt;Safari&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+  new UseBootstrapSelect(document.getElementById(&#x27;example-creatable&#x27;))
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="disabled-preview-tab" data-bs-toggle="tab" data-bs-target="#disabled-preview-tab-pane" type="button" role="tab" aria-controls="disabled-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="disabled-code-tab" data-bs-toggle="tab" data-bs-target="#disabled-code-tab-pane" type="button" role="tab" aria-controls="disabled-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Disabled</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="disabled-preview-tab-pane" role="tabpanel" aria-labelledby="disabled-preview-tab" tabindex="0">
+                      <div class="vstack gap-2">
+                        <select class="form-select" disabled="">
+                          <option value="">Choose browser</option>
+                          <option value="chrome">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                        <select class="form-select" multiple="" disabled="">
+                          <option value="">Choose browser</option>
+                          <option value="chrome" selected="">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox" selected="">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="disabled-code-tab-pane" role="tabpanel" aria-labelledby="disabled-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;select class=&quot;form-select example-disabled&quot; disabled&gt;...&lt;/select&gt;
+&lt;select class=&quot;form-select example-disabled&quot; disabled multiple&gt;...&lt;/select&gt;
+
+&lt;script&gt;
+  for (const select of document.querySelectorAll(&#x27;.example-disabled&#x27;)) {
+    new UseBootstrapSelect(select)
+  }
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="disabled-options-preview-tab" data-bs-toggle="tab" data-bs-target="#disabled-options-preview-tab-pane" type="button" role="tab" aria-controls="disabled-options-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="disabled-options-code-tab" data-bs-toggle="tab" data-bs-target="#disabled-options-code-tab-pane" type="button" role="tab" aria-controls="disabled-options-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Disabled options</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="disabled-options-preview-tab-pane" role="tabpanel" aria-labelledby="disabled-options-preview-tab" tabindex="0">
+                      <select class="form-select">
+                        <option value="">Choose browser</option>
+                        <option value="chrome">Chrome</option>
+                        <option value="edge">Edge</option>
+                        <option value="firefox">Firefox</option>
+                        <option value="opera" disabled="">Opera</option>
+                        <option value="safari" disabled="">Safari</option>
+                      </select>
+                    </div>
+                    <div class="tab-pane" id="disabled-options-code-tab-pane" role="tabpanel" aria-labelledby="disabled-options-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;select class=&quot;form-select&quot; id=&quot;example-disabled-option&quot;&gt;
+  &lt;option value=&quot;&quot;&gt;Choose browser&lt;/option&gt;
+  &lt;option value=&quot;chrome&quot;&gt;Chrome&lt;/option&gt;
+  &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+  &lt;option value=&quot;firefox&quot;&gt;Firefox&lt;/option&gt;
+  &lt;option value=&quot;opera&quot; disabled&gt;Opera&lt;/option&gt;
+  &lt;option value=&quot;safari&quot; disabled&gt;Safari&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;script&gt;
+  new UseBootstrapSelect(document.getElementById(&#x27;example-disabled-option&#x27;))
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="sizing-options-preview-tab" data-bs-toggle="tab" data-bs-target="#sizing-options-preview-tab-pane" type="button" role="tab" aria-controls="sizing-options-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="sizing-options-code-tab" data-bs-toggle="tab" data-bs-target="#sizing-options-code-tab-pane" type="button" role="tab" aria-controls="sizing-options-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Sizing</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="sizing-options-preview-tab-pane" role="tabpanel" aria-labelledby="sizing-options-preview-tab" tabindex="0">
+                      <div class="vstack gap-2">
+                        <select class="form-select form-select-sm" data-ub-select-search="true" data-ub-select-clear="true">
+                          <option value="">Choose browser</option>
+                          <option value="chrome">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                        <select multiple="" class="form-select form-select-sm" data-ub-select-search="true" data-ub-select-clear="true">
+                          <option value="">Choose browser</option>
+                          <option value="chrome" selected="">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox" selected="">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                        <select class="form-select" data-ub-select-search="true" data-ub-select-clear="true">
+                          <option value="">Choose browser</option>
+                          <option value="chrome">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                        <select multiple="" class="form-select" data-ub-select-search="true" data-ub-select-clear="true">
+                          <option value="">Choose browser</option>
+                          <option value="chrome" selected="">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox" selected="">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                        <select class="form-select form-select-lg" data-ub-select-search="true" data-ub-select-clear="true">
+                          <option value="">Choose browser</option>
+                          <option value="chrome">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                        <select multiple="" class="form-select form-select-lg" data-ub-select-search="true" data-ub-select-clear="true">
+                          <option value="">Choose browser</option>
+                          <option value="chrome" selected="">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox" selected="">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="sizing-options-code-tab-pane" role="tabpanel" aria-labelledby="sizing-options-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;select class=&quot;form-select example-sizing form-select-sm&quot;&gt;...&lt;/select&gt;
+&lt;select class=&quot;form-select example-sizing&quot;&gt;...&lt;/select&gt;
+&lt;select class=&quot;form-select example-sizing form-select-lg&quot;&gt;...&lt;/select&gt;
+
+&lt;script&gt;
+  for (const select of document.querySelectorAll(&#x27;.example-sizing&#x27;)) {
+    new UseBootstrapSelect(select)
+  }
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="validation-preview-tab" data-bs-toggle="tab" data-bs-target="#validation-preview-tab-pane" type="button" role="tab" aria-controls="validation-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="validation-code-tab" data-bs-toggle="tab" data-bs-target="#validation-code-tab-pane" type="button" role="tab" aria-controls="validation-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Validation</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="validation-preview-tab-pane" role="tabpanel" aria-labelledby="validation-preview-tab" tabindex="0">
+                      <form class="needs-validation vstack gap-3" novalidate="">
+                        <div>
+                          <select class="form-select" data-ub-select-clear="true" required="">
+                            <option value="">Choose browser</option>
+                            <option value="chrome">Chrome</option>
+                            <option value="edge">Edge</option>
+                            <option value="firefox">Firefox</option>
+                            <option value="opera">Opera</option>
+                            <option value="safari">Safari</option>
+                          </select>
+                          <div class="invalid-feedback">This field is required.</div>
+                          <div class="valid-feedback">Good choice.</div>
+                        </div>
+                        <div>
+                          <select class="form-select" multiple="" required="">
+                            <option value="">Choose browser</option>
+                            <option value="chrome">Chrome</option>
+                            <option value="edge">Edge</option>
+                            <option value="firefox">Firefox</option>
+                            <option value="opera">Opera</option>
+                            <option value="safari">Safari</option>
+                          </select>
+                          <div class="invalid-feedback">This field is required.</div>
+                          <div class="valid-feedback">Good choice.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>
+                    </div>
+                    <div class="tab-pane" id="validation-code-tab-pane" role="tabpanel" aria-labelledby="validation-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;form class=&quot;needs-validation&quot; novalidate&gt;
+  &lt;div&gt;
+    &lt;select class=&quot;form-select&quot; id=&quot;example-validation&quot; data-ub-select-clear required&gt;
+      &lt;option value=&quot;&quot;&gt;Choose browser&lt;/option&gt;
+      &lt;option value=&quot;chrome&quot;&gt;Chrome&lt;/option&gt;
+      &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+      &lt;option value=&quot;firefox&quot;&gt;Firefox&lt;/option&gt;
+      &lt;option value=&quot;opera&quot;&gt;Opera&lt;/option&gt;
+      &lt;option value=&quot;safari&quot;&gt;Safari&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;div class=&quot;invalid-feedback&quot;&gt;This field is required.&lt;/div&gt;
+    &lt;div class=&quot;valid-feedback&quot;&gt;Good choice.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class=&quot;btn btn-primary mt-3&quot; type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+  new UseBootstrapSelect(document.getElementById(&#x27;example-validation&#x27;))
+
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  void (function () {
+    document.querySelectorAll(&#x27;.needs-validation&#x27;).forEach(form =&gt; {
+      form.addEventListener(&#x27;submit&#x27;, event =&gt; {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add(&#x27;was-validated&#x27;)
+      })
+    })
+  })()
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 col-xxl-4">
+              <div class="card">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="methods-preview-tab" data-bs-toggle="tab" data-bs-target="#methods-preview-tab-pane" type="button" role="tab" aria-controls="methods-preview-tab-pane" aria-selected="true">Preview</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="methods-code-tab" data-bs-toggle="tab" data-bs-target="#methods-code-tab-pane" type="button" role="tab" aria-controls="methods-code-tab-pane" aria-selected="false">Code</button></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Methods</h5>
+                  <div class="tab-content">
+                    <div class="tab-pane show active" id="methods-preview-tab-pane" role="tabpanel" aria-labelledby="methods-preview-tab" tabindex="0">
+                      <div class="vstack gap-3">
+                        <select class="form-select" id="example1">
+                          <option value="">Choose browser</option>
+                          <option value="chrome">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                        <div class="hstack gap-3 flex-wrap">
+                          <button class="btn btn-sm btn-secondary" type="button" id="setValue1"><code class="text-white">setValue(&#x27;firefox&#x27;)</code></button>
+                          <button class="btn btn-sm btn-secondary" type="button" id="getValue1"><code class="text-white">getValue()</code></button>
+                        </div>
+                        <hr />
+                        <select class="form-select" id="example2" multiple="">
+                          <option value="">Choose browser</option>
+                          <option value="chrome" selected="">Chrome</option>
+                          <option value="edge">Edge</option>
+                          <option value="firefox" selected="">Firefox</option>
+                          <option value="opera">Opera</option>
+                          <option value="safari">Safari</option>
+                        </select>
+                        <div class="hstack gap-3 flex-wrap">
+                          <button class="btn btn-sm btn-secondary" type="button" id="removeValue"><code class="text-white">removeValue(&#x27;firefox&#x27;)</code></button>
+                          <button class="btn btn-sm btn-secondary" type="button" id="getValue2"><code class="text-white">getValue()</code></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="methods-code-tab-pane" role="tabpanel" aria-labelledby="methods-code-tab" tabindex="0">
+                      <pre><code class="language-html">&lt;select class=&quot;form-select&quot; id=&quot;example1&quot;&gt;
+  &lt;option value=&quot;&quot;&gt;Choose browser&lt;/option&gt;
+  &lt;option value=&quot;chrome&quot;&gt;Chrome&lt;/option&gt;
+  &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+  &lt;option value=&quot;firefox&quot;&gt;Firefox&lt;/option&gt;
+  &lt;option value=&quot;opera&quot;&gt;Opera&lt;/option&gt;
+  &lt;option value=&quot;safari&quot;&gt;Safari&lt;/option&gt;
+&lt;/select&gt;
+&lt;button class=&quot;btn btn-sm btn-light&quot; type=&quot;button&quot; id=&quot;setValue1&quot;&gt;setValue(&#x27;firefox&#x27;)&lt;/button&gt;
+&lt;button class=&quot;btn btn-sm btn-light&quot; type=&quot;button&quot; id=&quot;getValue1&quot;&gt;getValue()&lt;/button&gt;
+
+&lt;script&gt;
+  const example1 = new UseBootstrapSelect(document.getElementById(&#x27;example1&#x27;))
+  document.getElementById(&#x27;setValue1&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+    example1.setValue(&#x27;firefox&#x27;)
+  })
+  document.getElementById(&#x27;getValue1&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+    alert(example1.getValue())
+  })
+&lt;/script&gt;
+
+&lt;!-- ========================================================================================================== --&gt;
+
+&lt;select class=&quot;form-select&quot; id=&quot;example2&quot; multiple&gt;
+  &lt;option value=&quot;&quot;&gt;Choose browser&lt;/option&gt;
+  &lt;option selected value=&quot;chrome&quot;&gt;Chrome&lt;/option&gt;
+  &lt;option value=&quot;edge&quot;&gt;Edge&lt;/option&gt;
+  &lt;option selected value=&quot;firefox&quot;&gt;Firefox&lt;/option&gt;
+  &lt;option value=&quot;opera&quot;&gt;Opera&lt;/option&gt;
+  &lt;option value=&quot;safari&quot;&gt;Safari&lt;/option&gt;
+&lt;/select&gt;
+&lt;button class=&quot;btn btn-sm btn-light&quot; type=&quot;button&quot; id=&quot;removeValue&quot;&gt;removeValue(&#x27;firefox&#x27;)&lt;/button&gt;
+&lt;button class=&quot;btn btn-sm btn-light&quot; type=&quot;button&quot; id=&quot;getValue2&quot;&gt;getValue()&lt;/button&gt;
+
+&lt;script&gt;
+  const example2 = new UseBootstrapSelect(document.getElementById(&#x27;example2&#x27;))
+  document.getElementById(&#x27;removeValue&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+    example2.removeValue(&#x27;firefox&#x27;)
+  })
+  document.getElementById(&#x27;getValue2&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+    alert(JSON.stringify(example2.getValue()))
+  })
+&lt;/script&gt;
+</code></pre>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -404,7 +772,7 @@ import { UseBootstrapSelect } from 'use-bootstrap-select'</code></pre>
         <div class="tab-pane pt-4" id="methods-tab-pane" role="tabpanel" aria-labelledby="methods-tab" tabindex="0">
           <h2 class="fw-bold" id="methods">Methods</h2>
           <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="max-width: 600px">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -416,10 +784,10 @@ import { UseBootstrapSelect } from 'use-bootstrap-select'</code></pre>
               <tbody>
                 <tr>
                   <td><code>setValue</code></td>
-                  <td nowrap><code>string</code></td>
+                  <td class="text-nowrap"><code>string</code></td>
                   <td><code>void</code></td>
                   <td>
-                    <pre><code class="language-javascript">example.setValue('chrome')</code></pre>
+                    <pre class="mb-0"><code class="language-javascript">example.setValue(&#x27;chrome&#x27;)</code></pre>
                   </td>
                 </tr>
                 <tr>
@@ -427,7 +795,7 @@ import { UseBootstrapSelect } from 'use-bootstrap-select'</code></pre>
                   <td><code>string</code></td>
                   <td><code>void</code></td>
                   <td>
-                    <pre><code class="language-javascript">example.removeValue('chrome')</code></pre>
+                    <pre class="mb-0"><code class="language-javascript">example.removeValue(&#x27;chrome&#x27;)</code></pre>
                   </td>
                 </tr>
                 <tr>
@@ -435,7 +803,7 @@ import { UseBootstrapSelect } from 'use-bootstrap-select'</code></pre>
                   <td><code>null</code></td>
                   <td><code>string | array</code></td>
                   <td>
-                    <pre><code class="language-javascript">example.getValue()</code></pre>
+                    <pre class="mb-0"><code class="language-javascript">example.getValue()</code></pre>
                   </td>
                 </tr>
               </tbody>
@@ -444,73 +812,63 @@ import { UseBootstrapSelect } from 'use-bootstrap-select'</code></pre>
         </div>
       </div>
     </div>
-
-    <div class="modal" id="sourceCodeModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Source code</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary w-100 btn-lg" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script src="https://unpkg.com/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="dist/use-bootstrap-select.min.js"></script>
-    <script src="https://unpkg.com/prismjs/prism.js" data-manual></script>
-    <script src="https://unpkg.com/prismjs/plugins/file-highlight/prism-file-highlight.min.js"></script>
+    <script src="/bootstrap.bundle.min.js"></script>
+    <script src="/use-bootstrap-select.min.js"></script>
+    <script src="/prism.min.js"></script>
+    <script src="/masonry.pkgd.min.js"></script>
     <script>
-      // Dark mode
-      const switcher = document.getElementById('swithDark');
-      switcher.addEventListener('change', () => {
-        document.documentElement.setAttribute('data-bs-theme', switcher.checked ? 'dark' : 'light');
-      });
+      document.getElementById('bs-theme').addEventListener('change', (e) => {
+        document.documentElement.setAttribute('data-bs-theme', e.target.checked ? 'dark' : 'light')
+      })
 
-      // Prism code highlighter
-      Prism.highlightAll();
-      const sourceCodeModal = document.getElementById('sourceCodeModal');
-      sourceCodeModal.addEventListener('show.bs.modal', (e) => {
-        sourceCodeModal.querySelector('.modal-body').innerHTML = `<pre data-src="${e.relatedTarget.getAttribute('data-code')}"></pre>`;
-        Prism.highlightAll();
-      });
+      document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((el) => {
+        new bootstrap.Tooltip(el)
+      })
 
-      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      let initialized = false
+      document.getElementById('example-tab').addEventListener('shown.bs.tab', () => {
+        if (!initialized) {
+          document.querySelectorAll('select:not([id])').forEach((selectElement) => {
+            new UseBootstrapSelect(selectElement)
+          })
+          const example1 = new UseBootstrapSelect(document.getElementById('example1'))
+          document.getElementById('setValue1').addEventListener('click', () => {
+            example1.setValue('firefox')
+          })
+          document.getElementById('getValue1').addEventListener('click', () => {
+            alert(example1.getValue())
+          })
+          const example2 = new UseBootstrapSelect(document.getElementById('example2'))
+          document.getElementById('removeValue').addEventListener('click', () => {
+            example2.removeValue('firefox')
+          })
+          document.getElementById('getValue2').addEventListener('click', () => {
+            alert(JSON.stringify(example2.getValue()))
+          })
+          const msnry = new Masonry(document.getElementById('masonry-row'), {
+            percentPosition: true,
+            transitionDuration: 0,
+          })
+          document.querySelectorAll('#masonry-row [data-bs-toggle="tab"]').forEach((tab) => {
+            tab.addEventListener('shown.bs.tab', () => {
+              msnry.layout()
+            })
+          })
+        }
+        initialized = true
+      })
+
       void (function () {
         document.querySelectorAll('.needs-validation').forEach((form) => {
           form.addEventListener('submit', (event) => {
             if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
+              event.preventDefault()
+              event.stopPropagation()
             }
-            form.classList.add('was-validated');
-          });
-        });
-      })();
-
-      // EXAMPLES
-      document.querySelectorAll('select:not([id])').forEach((selectElement) => {
-        new UseBootstrapSelect(selectElement);
-      });
-      const example1 = new UseBootstrapSelect(document.getElementById('example1'));
-      document.getElementById('setValue1').addEventListener('click', () => {
-        example1.setValue('firefox');
-      });
-      document.getElementById('getValue1').addEventListener('click', () => {
-        alert(example1.getValue());
-      });
-
-      const example2 = new UseBootstrapSelect(document.getElementById('example2'));
-      document.getElementById('removeValue').addEventListener('click', () => {
-        example2.removeValue('firefox');
-      });
-      document.getElementById('getValue2').addEventListener('click', () => {
-        alert(JSON.stringify(example2.getValue()));
-      });
+            form.classList.add('was-validated')
+          })
+        })
+      })()
     </script>
   </body>
 </html>
