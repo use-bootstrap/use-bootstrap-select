@@ -4,7 +4,7 @@
   "version": "0.0.3",
   "description": "Create a select element using the native Bootstrap 5 dropdown UI",
   "license": "MIT",
-  "homepage": "https://use-bootstrap-select.netlify.app",
+  "homepage": "https://use-bootstrap.github.io/use-bootstrap-select/",
   "repository": "https://github.com/use-bootstrap/use-bootstrap-select",
   "bugs": {
     "url": "https://github.com/use-bootstrap/use-bootstrap-select/issues"
