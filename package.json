@@ -1,11 +1,11 @@
 {
   "name": "use-bootstrap-select",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Create a select element using the native Bootstrap 5 dropdown UI",
   "license": "MIT",
   "homepage": "https://use-bootstrap-select.netlify.app",
-  "repository": "git@github.com:use-bootstrap/use-bootstrap-select.git",
+  "repository": "https://github.com/use-bootstrap/use-bootstrap-select",
   "bugs": {
     "url": "https://github.com/use-bootstrap/use-bootstrap-select/issues"
   },
@@ -40,7 +40,7 @@
     "dev:js:iife": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.js --watch --format=iife",
     "dev:dts": "tsc -d --emitDeclarationOnly src/index.ts --declarationDir dist --lib esnext,dom --watch",
     "dev:css": "sass --source-map --embed-sources src/index.scss:dist/use-bootstrap-select.css --watch",
-    "build": "shx rm -rf dist && rusco build:* && shx rm -rf docs/dist && shx cp -R dist docs",
+    "build": "shx rm -rf dist && rusco build:* && shx rm -rf docs/dist && shx cp -R dist/*.min.{css,js} docs",
     "build:js:esm": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.mjs --format=esm --log-level=silent",
     "build:js:iife": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.js --format=iife --log-level=silent",
     "build:js:esm:min": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.min.mjs --minify --mangle-props=^_ --format=esm --log-level=silent",
@@ -51,7 +51,7 @@
     "lint:fix": "eslint src --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "0.39.8",
+    "@antfu/eslint-config": "0.40.0",
     "@types/bootstrap": "5.2.6",
     "autoprefixer": "10.4.14",
     "bootstrap": "5.3.1",
