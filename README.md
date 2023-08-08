@@ -59,7 +59,7 @@ or, since it also comes with an IIFE bundle, you can insert it directly into you
 Once you imported the library, you can initiate it
 
 ```javascript
-const example = new UseBootstrapSelect(document.getElementById('example'))
+const example = UseBootstrapSelect(document.getElementById('example'))
 ```
 
 

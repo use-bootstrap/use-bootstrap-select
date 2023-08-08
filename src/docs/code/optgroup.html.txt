@@ -1,0 +1,16 @@
+<select class="form-select" id="example-optgroup">
+  <optgroup label="Theropods">
+    <option>Tyrannosaurus</option>
+    <option>Velociraptor</option>
+    <option>Deinonychus</option>
+  </optgroup>
+  <optgroup label="Sauropods">
+    <option>Diplodocus</option>
+    <option>Saltasaurus</option>
+    <option>Apatosaurus</option>
+  </optgroup>
+</select>
+
+<script>
+  UseBootstrapSelect(document.getElementById('example-optgroup'))
+</script>

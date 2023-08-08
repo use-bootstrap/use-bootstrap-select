@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.html.txt": "html",
+    "*.css.txt": "css",
+    "*.js.txt": "javascript",
+  },
+}

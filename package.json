@@ -1,10 +1,10 @@
 {
   "name": "use-bootstrap-select",
   "type": "module",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Create a select element using the native Bootstrap 5 dropdown UI",
   "license": "MIT",
-  "homepage": "https://use-bootstrap.github.io/use-bootstrap-select/",
+  "homepage": "https://use-bootstrap-select.js.org",
   "repository": "https://github.com/use-bootstrap/use-bootstrap-select",
   "bugs": {
     "url": "https://github.com/use-bootstrap/use-bootstrap-select/issues"
@@ -16,9 +16,15 @@
     "bootstrap dropdown",
     "bootstrap5"
   ],
+  "exports": {
+    "import": {
+      "types": "./dist/use-bootstrap-select.d.mts",
+      "default": "./dist/use-bootstrap-select.mjs"
+    }
+  },
   "main": "./dist/use-bootstrap-select.mjs",
   "module": "./dist/use-bootstrap-select.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/use-bootstrap-select.d.mts",
   "files": [
     "dist",
     "src/style.scss"
@@ -35,31 +41,41 @@
     "not Explorer <= 11"
   ],
   "scripts": {
-    "dev": "rusco dev:*",
-    "dev:js:esm": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.mjs --watch --format=esm",
-    "dev:js:iife": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.js --watch --format=iife",
-    "dev:dts": "tsc -d --emitDeclarationOnly src/index.ts --declarationDir dist --lib esnext,dom --watch",
-    "dev:css": "sass --source-map --embed-sources src/index.scss:dist/use-bootstrap-select.css --watch",
-    "build": "shx rm -rf dist && rusco build:* && shx cp dist/*.min.{css,js} docs",
-    "build:js:esm": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.mjs --format=esm --log-level=silent",
-    "build:js:iife": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.js --format=iife --log-level=silent",
-    "build:js:esm:min": "esbuild src/index.ts --outfile=dist/use-bootstrap-select.min.mjs --minify --mangle-props=^_ --format=esm --log-level=silent",
-    "build:js:iife:min": "esbuild src/index.iife.ts --bundle --outfile=dist/use-bootstrap-select.min.js --minify --mangle-props=^_ --format=iife --log-level=silent",
-    "build:dts": "tsc -d --emitDeclarationOnly src/index.ts --declarationDir dist --lib esnext,dom",
-    "build:css": "sass --source-map --embed-sources src/index.scss:dist/use-bootstrap-select.css && postcss dist/use-bootstrap-select.css --use autoprefixer --map --replace && esbuild dist/use-bootstrap-select.css --minify --outfile=dist/use-bootstrap-select.min.css --log-level=silent",
+    "dev": "jalankan dev:* -p",
+    "dev:js": "pkgroll --watch",
+    "dev:js:iife": "echo \"import { UseBootstrapSelect } from './src/use-bootstrap-select'; window.UseBootstrapSelect = UseBootstrapSelect\" | esbuild --loader=ts --bundle --outfile=dist/use-bootstrap-select.js --watch",
+    "dev:css": "sass --source-map --embed-sources src/use-bootstrap-select.scss:dist/use-bootstrap-select.css --watch",
+    "dev:docs": "halaman dev src/docs/pages --delay 0 --static dist --watch=src/docs/**/*,dist/**/*",
+    "build": "shx rm -rf dist && jalankan build:*",
+    "build:js": "pkgroll",
+    "build:js:min": "esbuild dist/use-bootstrap-select.mjs --minify --outfile=dist/use-bootstrap-select.min.mjs --log-level=silent",
+    "build:iife": "echo \"import { UseBootstrapSelect } from './src/use-bootstrap-select'; window.UseBootstrapSelect = UseBootstrapSelect\" | esbuild --loader=ts --bundle --outfile=dist/use-bootstrap-select.js --log-level=silent",
+    "build:iife:min": "esbuild dist/use-bootstrap-select.js --minify --outfile=dist/use-bootstrap-select.min.js --log-level=silent",
+    "build:css": "sass --source-map --embed-sources src/use-bootstrap-select.scss:dist/use-bootstrap-select.css",
+    "build:css:prefix": "postcss dist/use-bootstrap-select.css --use autoprefixer --map --replace",
+    "build:css:min": "esbuild dist/use-bootstrap-select.css --minify --outfile=dist/use-bootstrap-select.min.css --log-level=silent",
+    "build:docs": "halaman build src/docs/pages docs --pretty --static dist",
     "lint": "eslint src",
-    "lint:fix": "eslint src --fix"
+    "lint:fix": "eslint src --fix",
+    "serve": "halaman serve docs"
   },
   "devDependencies": {
     "@antfu/eslint-config": "0.40.2",
     "@types/bootstrap": "5.2.6",
+    "@types/node": "20.4.8",
+    "@types/react": "18.2.19",
     "autoprefixer": "10.4.14",
     "bootstrap": "5.3.1",
-    "esbuild": "0.18.19",
+    "esbuild": "0.18.20",
     "eslint": "8.46.0",
+    "eslint-plugin-react": "7.33.1",
+    "halaman": "0.2.3",
+    "jalankan": "0.0.1",
+    "pkgroll": "1.11.0",
     "postcss": "8.4.27",
     "postcss-cli": "10.1.0",
-    "rusco": "0.1.0",
+    "react": "18.2.0",
+    "react-icons": "4.10.1",
     "sass": "1.64.2",
     "shx": "0.3.4",
     "typescript": "5.1.6"

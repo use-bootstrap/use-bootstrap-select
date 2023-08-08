@@ -1,0 +1,32 @@
+<form class="needs-validation" novalidate>
+  <div>
+    <select class="form-select" id="example-validation" data-ub-select-clear required>
+      <option value="">Choose browser</option>
+      <option value="chrome">Chrome</option>
+      <option value="edge">Edge</option>
+      <option value="firefox">Firefox</option>
+      <option value="opera">Opera</option>
+      <option value="safari">Safari</option>
+    </select>
+    <div class="invalid-feedback">This field is required.</div>
+    <div class="valid-feedback">Good choice.</div>
+  </div>
+  <button class="btn btn-primary mt-3" type="submit">Submit</button>
+</form>
+
+<script>
+  UseBootstrapSelect(document.getElementById('example-validation'))
+
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  void (function () {
+    document.querySelectorAll('.needs-validation').forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      })
+    })
+  })()
+</script>

@@ -1,7 +1,5 @@
 node_modules
 dist
-docs/dist
-.vscode
 .DS_Store
 .eslintcache
 *.log*

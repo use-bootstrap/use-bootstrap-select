@@ -1,7 +1,10 @@
 {
+  "plugins": ["react"],
   "extends": "@antfu",
   "rules": {
-    "curly": ["error", "all"]
+    "curly": ["error", "all"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "react/jsx-indent": ["error", 2]
   },
-  "ignorePatterns": ["docs"]
+  "ignorePatterns": ["docs/**/*"]
 }
