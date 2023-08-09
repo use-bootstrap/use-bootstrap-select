@@ -1,3 +1,4 @@
+/* eslint-disable n/prefer-global/process */
 import { BsGithub } from 'react-icons/bs/index.js'
 import { FiMoon, FiSun } from 'react-icons/fi/index.js'
 import { AiOutlineSelect } from 'react-icons/ai/index.js'
@@ -10,15 +11,16 @@ import { Example } from '../content/Example'
 import { Methods } from '../content/Methods'
 
 export default function () {
+  const isDev = process.argv.includes('dev')
   const css = [
     'https://cdn.statically.io/gh/twbs/bootstrap/main/dist/css/bootstrap.min.css',
-    'use-bootstrap-select.min.css',
+    isDev ? 'use-bootstrap-select.css' : 'use-bootstrap-select.min.css',
     'https://cdn.statically.io/gh/PrismJS/prism/master/themes/prism-tomorrow.min.css',
     'https://fonts.upset.dev/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap',
   ]
   const js = [
     'https://cdn.statically.io/gh/twbs/bootstrap/main/dist/js/bootstrap.bundle.min.js',
-    'use-bootstrap-select.min.js',
+    isDev ? 'use-bootstrap-select.js' : 'use-bootstrap-select.min.js',
     'https://cdn.statically.io/gh/PrismJS/prism/master/prism.min.js',
     'https://cdn.statically.io/gh/desandro/masonry/master/dist/masonry.pkgd.min.js',
   ]
