@@ -4,7 +4,7 @@ type ElementAttributes<T extends keyof HTMLElementTagNameMap> = {
   [K in keyof HTMLElementTagNameMap[T]]?: HTMLElementTagNameMap[T][K] | Partial<CSSStyleDeclaration>
 }
 
-function UseBootstrapSelect(target: HTMLSelectElement) {
+function UseBootstrapSelect(target: HTMLSelectElement, bootstrapInstance?: object) {
   const { ubSelectClear, ubSelectSearch, ubSelectCreate, ubSelectMaxHeight } = target.dataset
   const isClear = ubSelectClear !== undefined
   const isSearch = ubSelectSearch !== undefined
@@ -118,7 +118,7 @@ function UseBootstrapSelect(target: HTMLSelectElement) {
   dropdown.append(dropdownToggle)
   dropdownMenu.style.fontSize = `${getComputedSize(dropdownToggle, 'font-size')}rem`
   dropdown.append(dropdownMenu)
-  const instance = bootstrap.Dropdown.getOrCreateInstance(dropdownToggle)
+  const instance = ((bootstrapInstance ?? bootstrap) as typeof bootstrap).Dropdown.getOrCreateInstance(dropdownToggle)
 
   // Tag border radius.
   const dropdownToggleBorderRadius = getComputedSize(dropdownToggle, 'border-radius')
