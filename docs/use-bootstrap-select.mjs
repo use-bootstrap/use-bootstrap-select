@@ -1,4 +1,4 @@
-function UseBootstrapSelect(target) {
+function UseBootstrapSelect(target, bootstrapInstance) {
   const { ubSelectClear, ubSelectSearch, ubSelectCreate, ubSelectMaxHeight } = target.dataset;
   const isClear = ubSelectClear !== void 0;
   const isSearch = ubSelectSearch !== void 0;
@@ -90,7 +90,7 @@ function UseBootstrapSelect(target) {
   dropdown.append(dropdownToggle);
   dropdownMenu.style.fontSize = `${getComputedSize(dropdownToggle, "font-size")}rem`;
   dropdown.append(dropdownMenu);
-  const instance = bootstrap.Dropdown.getOrCreateInstance(dropdownToggle);
+  const instance = (bootstrapInstance ?? bootstrap).Dropdown.getOrCreateInstance(dropdownToggle);
   const dropdownToggleBorderRadius = getComputedSize(dropdownToggle, "border-radius");
   const tagBorderRadius = dropdownToggleBorderRadius > 0.0625 ? dropdownToggleBorderRadius - 0.0625 : 0;
   function hasPlaceholder() {
