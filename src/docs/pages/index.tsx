@@ -13,16 +13,16 @@ import { Methods } from '../content/Methods'
 export default function () {
   const isDev = process.argv.includes('dev')
   const css = [
-    'https://cdn.statically.io/gh/twbs/bootstrap/main/dist/css/bootstrap.min.css',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
     isDev ? 'use-bootstrap-select.css' : 'use-bootstrap-select.min.css',
-    'https://cdn.statically.io/gh/PrismJS/prism/master/themes/prism-tomorrow.min.css',
+    'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css',
     'https://fonts.upset.dev/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap',
   ]
   const js = [
-    'https://cdn.statically.io/gh/twbs/bootstrap/main/dist/js/bootstrap.bundle.min.js',
+    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js',
     isDev ? 'use-bootstrap-select.js' : 'use-bootstrap-select.min.js',
-    'https://cdn.statically.io/gh/PrismJS/prism/master/prism.min.js',
-    'https://cdn.statically.io/gh/desandro/masonry/master/dist/masonry.pkgd.min.js',
+    'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js',
+    'https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js',
   ]
   return (
     <html lang="en" data-bs-theme="light">
