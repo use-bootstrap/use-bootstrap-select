@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Use Bootstrap Select Demo</title>
-    <link href="https://unpkg.com/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="node_modules/use-bootstrap-select/dist/use-bootstrap-select.min.css" rel="stylesheet">
   </head>
   <body>
@@ -16,7 +16,7 @@
       <option value="opera">Opera</option>
       <option value="safari">Safari</option>
     </select>
-    <script src="https://unpkg.com/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="node_modules/use-bootstrap-select/dist/use-bootstrap-select.min.js"></script>
   </body>
 </html>
