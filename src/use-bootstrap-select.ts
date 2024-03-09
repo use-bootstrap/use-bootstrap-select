@@ -5,11 +5,22 @@ type ElementAttributes<T extends keyof HTMLElementTagNameMap> = {
 }
 
 function UseBootstrapSelect(target: HTMLSelectElement, bootstrapInstance?: object) {
-  const { ubSelectClear, ubSelectSearch, ubSelectCreate, ubSelectMaxHeight } = target.dataset
+  const {
+    ubSelectClear,
+    ubSelectSearch,
+    ubSelectCreate,
+    ubSelectMaxHeight,
+    ubSelectSearchPlaceholder,
+    ubSelectNoResultsText,
+    ubSelectCreatableText,
+  } = target.dataset
   const isClear = ubSelectClear !== undefined
   const isSearch = ubSelectSearch !== undefined
   const isCreate = ubSelectCreate !== undefined
   const maxHeight = ubSelectMaxHeight || '25rem'
+  const searchPlaceholder = ubSelectSearchPlaceholder || 'Search'
+  const noResultsText = ubSelectNoResultsText || 'No results found'
+  const creatableText = ubSelectCreatableText || 'Press Enter to add {value}'
   const isMultiple = target.multiple
   const isDisabled = target.disabled
 
@@ -95,7 +106,7 @@ function UseBootstrapSelect(target: HTMLSelectElement, bootstrapInstance?: objec
     searchInput = createElement('input', {
       type: 'text',
       className: classSearchInput,
-      placeholder: 'Search',
+      placeholder: searchPlaceholder,
     })
     target.classList.contains('form-select-sm') && searchInput.classList.add('form-control-sm')
     target.classList.contains('form-select-lg') && searchInput.classList.add('form-control-lg')
@@ -104,7 +115,7 @@ function UseBootstrapSelect(target: HTMLSelectElement, bootstrapInstance?: objec
     div.append(searchInput)
     dropdownMenu.prepend(div)
     searchNoResults = createElement('div', {
-      textContent: 'No results found',
+      textContent: noResultsText,
       className: classHidden,
     })
     searchNoResults.style.padding = paddingDropdownItem
@@ -295,7 +306,8 @@ function UseBootstrapSelect(target: HTMLSelectElement, bootstrapInstance?: objec
           else {
             searchNoResults.classList.remove(classHidden)
             if (isCreate) {
-              searchNoResults.innerHTML = `Press Enter to add "<b>${value}</b>"`
+              // searchNoResults.innerHTML = `Press Enter to add "<b>${value}</b>"`
+              searchNoResults.innerHTML = creatableText.replace('{value}', `<b>${value}</b>`)
               if (e.key === 'Enter') {
                 const newOption = createElement('option', {
                   value,
