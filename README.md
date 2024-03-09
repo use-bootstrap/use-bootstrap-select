@@ -72,10 +72,21 @@ data-ub-select-clear
 data-ub-select-search
 data-ub-select-create
 data-ub-select-max-height
+data-ub-select-search-placeholder
+data-ub-select-no-results-text
+data-ub-select-creatable-text
 ```
 
 ```html
-<select data-ub-select-clear data-ub-select-search data-ub-select-create data-ub-select-max-height="25rem">...</select>
+<select
+  data-ub-select-clear
+  data-ub-select-search
+  data-ub-select-create
+  data-ub-select-max-height="25rem"
+  data-ub-select-search-placeholder="Search"
+  data-ub-select-no-results-text="No results found"
+  data-ub-select-creatable-text="Press Enter to add {value}"
+>...</select>
 ```
 ## Methods
 
