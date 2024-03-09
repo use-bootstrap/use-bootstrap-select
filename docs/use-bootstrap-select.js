@@ -1,11 +1,22 @@
 (() => {
   // src/use-bootstrap-select.ts
   function UseBootstrapSelect(target, bootstrapInstance) {
-    const { ubSelectClear, ubSelectSearch, ubSelectCreate, ubSelectMaxHeight } = target.dataset;
+    const {
+      ubSelectClear,
+      ubSelectSearch,
+      ubSelectCreate,
+      ubSelectMaxHeight,
+      ubSelectSearchPlaceholder,
+      ubSelectNoResultsText,
+      ubSelectCreatableText
+    } = target.dataset;
     const isClear = ubSelectClear !== void 0;
     const isSearch = ubSelectSearch !== void 0;
     const isCreate = ubSelectCreate !== void 0;
     const maxHeight = ubSelectMaxHeight || "25rem";
+    const searchPlaceholder = ubSelectSearchPlaceholder || "Search";
+    const noResultsText = ubSelectNoResultsText || "No results found";
+    const creatableText = ubSelectCreatableText || "Press Enter to add {value}";
     const isMultiple = target.multiple;
     const isDisabled = target.disabled;
     const classDropdown = "use-bootstrap-select";
@@ -72,7 +83,7 @@
       searchInput = createElement("input", {
         type: "text",
         className: classSearchInput,
-        placeholder: "Search"
+        placeholder: searchPlaceholder
       });
       target.classList.contains("form-select-sm") && searchInput.classList.add("form-control-sm");
       target.classList.contains("form-select-lg") && searchInput.classList.add("form-control-lg");
@@ -81,7 +92,7 @@
       div.append(searchInput);
       dropdownMenu.prepend(div);
       searchNoResults = createElement("div", {
-        textContent: "No results found",
+        textContent: noResultsText,
         className: classHidden
       });
       searchNoResults.style.padding = paddingDropdownItem;
@@ -244,7 +255,7 @@
             } else {
               searchNoResults.classList.remove(classHidden);
               if (isCreate) {
-                searchNoResults.innerHTML = `Press Enter to add "<b>${value}</b>"`;
+                searchNoResults.innerHTML = creatableText.replace("{value}", `<b>${value}</b>`);
                 if (e.key === "Enter") {
                   const newOption = createElement("option", {
                     value,
