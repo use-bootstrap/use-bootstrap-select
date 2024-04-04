@@ -1,7 +1,7 @@
 {
   "name": "use-bootstrap-select",
   "type": "module",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Create a select element using the native Bootstrap 5 dropdown UI",
   "license": "MIT",
   "homepage": "https://use-bootstrap-select.js.org",
@@ -16,18 +16,14 @@
     "bootstrap dropdown",
     "bootstrap5"
   ],
-  "exports": {
-    "import": {
-      "types": "./dist/use-bootstrap-select.d.mts",
-      "default": "./dist/use-bootstrap-select.mjs"
-    }
-  },
-  "main": "./dist/use-bootstrap-select.mjs",
-  "module": "./dist/use-bootstrap-select.mjs",
-  "types": "./dist/use-bootstrap-select.d.mts",
+  "source": "./src/lib/use-bootstrap-select.tsx",
+  "main": "./dist/use-bootstrap-select.esm.js",
+  "module": "./dist/use-bootstrap-select.esm.js",
+  "types": "./dist/use-bootstrap-select.esm.d.ts",
+  "libName": "UseBootstrapSelect",
   "files": [
     "dist",
-    "src/style.scss"
+    "scss"
   ],
   "browserslist": [
     ">= 0.5%",
@@ -41,42 +37,44 @@
     "not Explorer <= 11"
   ],
   "scripts": {
-    "dev": "jalankan dev:* -p",
-    "dev:js:iife": "echo \"import { UseBootstrapSelect } from './src/use-bootstrap-select'; window.UseBootstrapSelect = UseBootstrapSelect\" | esbuild --loader=ts --bundle --outfile=dist/use-bootstrap-select.js --log-level=error --watch=forever",
-    "dev:css": "sass --source-map --embed-sources src/use-bootstrap-select.scss:dist/use-bootstrap-select.css --watch",
-    "dev:docs": "halaman dev src/docs/pages --delay 0 --static dist --watch=src/docs/**/*,dist/**/*",
-    "build": "shx rm -rf dist && jalankan build:*",
-    "build:js": "pkgroll",
-    "build:js:min": "esbuild dist/use-bootstrap-select.mjs --minify --outfile=dist/use-bootstrap-select.min.mjs --log-level=silent",
-    "build:iife": "echo \"import { UseBootstrapSelect } from './src/use-bootstrap-select'; window.UseBootstrapSelect = UseBootstrapSelect\" | esbuild --loader=ts --bundle --outfile=dist/use-bootstrap-select.js --log-level=silent",
-    "build:iife:min": "esbuild dist/use-bootstrap-select.js --minify --outfile=dist/use-bootstrap-select.min.js --log-level=silent",
-    "build:css": "sass --source-map --embed-sources src/use-bootstrap-select.scss:dist/use-bootstrap-select.css",
-    "build:css:prefix": "postcss dist/use-bootstrap-select.css --use autoprefixer --map --replace",
-    "build:css:min": "esbuild dist/use-bootstrap-select.css --minify --outfile=dist/use-bootstrap-select.min.css --log-level=silent",
-    "build:docs": "halaman build src/docs/pages docs --pretty --static dist",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "serve": "halaman serve docs"
+    "dev": "vite --host",
+    "prebuild": "tsc && eslint .",
+    "build": "jalankan build:*",
+    "build:js": "vite build -c vite.config.lib.ts",
+    "build:js:min": "esbuild dist/*.js --minify --outdir=dist --out-extension:.js=.min.js --tsconfig-raw='{}'",
+    "build:css": "sass --source-map --embed-sources src/lib:dist",
+    "build:css:prefix": "postcss dist/*.css --use autoprefixer --map --replace",
+    "build:css:min": "esbuild dist/*.css --minify --outdir=dist --out-extension:.css=.min.css",
+    "build:docs": "vite build",
+    "postbuild": "purgecss --css docs/assets/*.css --content docs/**/*.{html,js} --safelist use-bootstrap-select --output docs/assets/",
+    "preview": "vite preview --host",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "0.43.1",
+    "@antfu/eslint-config": "2.12.1",
+    "@fontsource/hind-siliguri": "5.0.12",
+    "@solidjs/router": "0.13.1",
     "@types/bootstrap": "5.2.10",
-    "@types/node": "20.11.25",
-    "@types/react": "18.2.64",
-    "autoprefixer": "10.4.18",
+    "@types/node": "20.12.4",
+    "@types/prismjs": "1.26.3",
+    "autoprefixer": "10.4.19",
     "bootstrap": "5.3.3",
-    "esbuild": "0.19.5",
+    "esbuild": "0.20.2",
     "eslint": "8.57.0",
-    "eslint-plugin-react": "7.34.0",
-    "halaman": "0.2.4",
     "jalankan": "0.0.1",
-    "pkgroll": "1.11.0",
-    "postcss": "8.4.35",
-    "postcss-cli": "10.1.0",
-    "react": "18.2.0",
-    "react-icons": "4.12.0",
-    "sass": "1.71.1",
-    "shx": "0.3.4",
-    "typescript": "5.4.2"
+    "postcss": "8.4.38",
+    "postcss-cli": "11.0.0",
+    "prettier": "3.2.5",
+    "prismjs": "1.29.0",
+    "purgecss": "6.0.0",
+    "sass": "1.74.1",
+    "solid-js": "1.8.16",
+    "tslib": "2.6.2",
+    "typescript": "5.4.3",
+    "vite": "5.2.8",
+    "vite-plugin-dts": "3.8.1",
+    "vite-plugin-full-reload": "1.1.0",
+    "vite-plugin-solid": "2.10.2"
   }
 }

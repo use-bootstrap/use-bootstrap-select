@@ -1,8 +1,0 @@
-<select class="form-select example-disabled" disabled>...</select>
-<select class="form-select example-disabled" disabled multiple>...</select>
-
-<script>
-  for (const select of document.querySelectorAll('.example-disabled')) {
-    UseBootstrapSelect(select)
-  }
-</script>

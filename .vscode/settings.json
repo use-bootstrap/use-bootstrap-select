@@ -1,7 +1,4 @@
 {
-  "files.associations": {
-    "*.html.txt": "html",
-    "*.css.txt": "css",
-    "*.js.txt": "javascript",
-  },
+  "html-css-class-completion.includeGlobPattern": "node_modules/bootstrap/dist/css/bootstrap.css",
+  "html-css-class-completion.excludeGlobPattern": "!node_modules/bootstrap/dist/css/bootstrap.css",
 }

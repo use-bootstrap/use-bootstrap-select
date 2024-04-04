@@ -1,0 +1,13 @@
+@import '../../node_modules/bootstrap/scss/functions';
+
+// any default variable overrides here
+
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/variables-dark';
+
+// any default map overrides here
+
+@import '../../node_modules/bootstrap/scss/maps';
+@import '../../node_modules/bootstrap/scss/mixins';
+
+@import '../../scss/use-bootstrap-select.scss';

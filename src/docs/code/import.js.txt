@@ -1,2 +1,0 @@
-import 'use-bootstrap-select/dist/use-bootstrap-select.css'
-import { UseBootstrapSelect } from 'use-bootstrap-select'

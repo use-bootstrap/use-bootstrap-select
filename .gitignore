@@ -1,7 +1,3 @@
 node_modules
 dist
-.DS_Store
-.eslintcache
-*.log*
-*.conf*
-*.env*
+pnpm-lock.yaml

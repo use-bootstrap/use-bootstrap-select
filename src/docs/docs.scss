@@ -1,0 +1,50 @@
+@import '../../node_modules/bootstrap/scss/functions';
+
+// any default variable overrides here
+
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/variables-dark';
+
+// any default map overrides here
+
+// @import '../../node_modules/bootstrap/scss/maps';
+@import '../../node_modules/bootstrap/scss/mixins';
+
+body {
+  font-family: 'Hind Siliguri', sans-serif;
+}
+
+.nav-underline .nav-link {
+  transition: none;
+
+  #main-nav &:focus-visible {
+    box-shadow: none;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  #main-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  #main-nav {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+pre[class*=language-] {
+  font-size: 0.75rem;
+  border-radius: var(--bs-border-radius);
+  background: #2b3035;
+  margin: 0;
+  margin-bottom: 2rem;
+}
+
+[data-bs-theme="light"] {
+  --bs-link-color: var(--bs-dark);
+}
+
+[data-bs-theme="dark"] {
+  --bs-link-color: var(--bs-light);
+}
