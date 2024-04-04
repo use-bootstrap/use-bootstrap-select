@@ -1,6 +1,6 @@
 import type { RouteDefinition } from '@solidjs/router'
 import { For, Show, Suspense, createEffect, createSignal, lazy } from 'solid-js'
-import { A, Router, useIsRouting, useLocation } from '@solidjs/router'
+import { A, HashRouter, useIsRouting, useLocation } from '@solidjs/router'
 import pkg from '../../package.json'
 
 // Routes
@@ -182,7 +182,7 @@ function Layout(props: any) {
 export default function App() {
   return (
     <Suspense>
-      <Router root={Layout}>{routes}</Router>
+      <HashRouter root={Layout}>{routes}</HashRouter>
     </Suspense>
   )
 }
