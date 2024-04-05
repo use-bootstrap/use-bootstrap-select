@@ -46,7 +46,7 @@
     "build:css:prefix": "postcss dist/*.css --use autoprefixer --map --replace",
     "build:css:min": "esbuild dist/*.css --minify --outdir=dist --out-extension:.css=.min.css",
     "build:docs": "vite build",
-    "postbuild": "purgecss --css docs/assets/*.css --content docs/**/*.{html,js} --safelist use-bootstrap-select --output docs/assets/",
+    "postbuild": "purgecss --css docs/assets/*.css --content docs/**/*.{html,js} --safelist use-bootstrap-select use-bootstrap-select-wrapper --output docs/assets/",
     "preview": "vite preview --host",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -71,7 +71,7 @@
     "sass": "1.74.1",
     "solid-js": "1.8.16",
     "tslib": "2.6.2",
-    "typescript": "5.4.3",
+    "typescript": "5.4.4",
     "vite": "5.2.8",
     "vite-plugin-dts": "3.8.1",
     "vite-plugin-full-reload": "1.1.0",
