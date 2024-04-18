@@ -52,11 +52,11 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "2.12.1",
+    "@antfu/eslint-config": "2.15.0",
     "@fontsource/hind-siliguri": "5.0.12",
-    "@solidjs/router": "0.13.1",
+    "@solidjs/router": "0.13.2",
     "@types/bootstrap": "5.2.10",
-    "@types/node": "20.12.4",
+    "@types/node": "20.12.7",
     "@types/prismjs": "1.26.3",
     "autoprefixer": "10.4.19",
     "bootstrap": "5.3.3",
@@ -68,12 +68,12 @@
     "prettier": "3.2.5",
     "prismjs": "1.29.0",
     "purgecss": "6.0.0",
-    "sass": "1.74.1",
+    "sass": "1.75.0",
     "solid-js": "1.8.16",
     "tslib": "2.6.2",
-    "typescript": "5.4.4",
-    "vite": "5.2.8",
-    "vite-plugin-dts": "3.8.1",
+    "typescript": "5.4.5",
+    "vite": "5.2.9",
+    "vite-plugin-dts": "3.8.3",
     "vite-plugin-full-reload": "1.1.0",
     "vite-plugin-solid": "2.10.2"
   }
