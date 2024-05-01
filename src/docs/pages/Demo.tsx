@@ -272,8 +272,6 @@ function LiveDemo() {
               <h5>Methods:</h5>
               <div class="d-flex flex-wrap gap-3">
                 <ButtonMethod onclick={() => example.show()}>example.show()</ButtonMethod>
-                <ButtonMethod onclick={() => example.hide()}>example.hide()</ButtonMethod>
-                <ButtonMethod onclick={() => example.toggle()}>example.toggle()</ButtonMethod>
                 <ButtonMethod onclick={() => alert(JSON.stringify(example.getValue()))}>example.getValue()</ButtonMethod>
                 <Show when={multiple()} fallback={<ButtonMethod onclick={() => example.setValue('banana')}>example.setValue('banana')</ButtonMethod>}>
                   <ButtonMethod onclick={() => example.setValue(['banana', 'grape'])}>example.setValue(['banana', 'grape'])</ButtonMethod>
