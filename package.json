@@ -1,7 +1,7 @@
 {
   "name": "use-bootstrap-select",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Create a select element using the native Bootstrap 5 dropdown UI",
   "license": "MIT",
   "homepage": "https://use-bootstrap-select.js.org",

@@ -1,3 +1,6 @@
+v2.1.1
+  - Fix show method not focusing on input.
+
 v2.1.0
   - Added new methods: `show`, `hide`, and `toggle`.
 

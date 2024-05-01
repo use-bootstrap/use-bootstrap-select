@@ -226,9 +226,6 @@ export default class UseBootstrapSelect {
       this.selectElement.addEventListener('focus', () => {
         inputElement.focus()
       })
-      this.selectElement.addEventListener(eventShow, show)
-      this.selectElement.addEventListener(eventHide, hide)
-      this.selectElement.addEventListener(eventToggle, toggle)
 
       const [focus, setFocus] = createSignal(false)
       const [shown, setShown] = createSignal(false)
@@ -284,6 +281,20 @@ export default class UseBootstrapSelect {
           hide()
         }
       }
+      this.selectElement.addEventListener(eventShow, () => {
+        show()
+        inputElement.focus()
+      })
+      this.selectElement.addEventListener(eventHide, hide)
+      this.selectElement.addEventListener(eventToggle, () => {
+        if (!shown()) {
+          show()
+          inputElement.focus()
+        }
+        else {
+          hide()
+        }
+      })
 
       // Dropdown
       const Dropdown = ({ children }: WithChildren) => {
