@@ -1,7 +1,7 @@
 {
   "name": "use-bootstrap-select",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Create a select element using the native Bootstrap 5 dropdown UI",
   "license": "MIT",
   "homepage": "https://use-bootstrap-select.js.org",
@@ -52,8 +52,8 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "2.15.0",
-    "@fontsource/hind-siliguri": "5.0.12",
+    "@antfu/eslint-config": "2.16.1",
+    "@fontsource/hind-siliguri": "5.0.13",
     "@solidjs/router": "0.13.2",
     "@types/bootstrap": "5.2.10",
     "@types/node": "20.12.7",
@@ -68,12 +68,12 @@
     "prettier": "3.2.5",
     "prismjs": "1.29.0",
     "purgecss": "6.0.0",
-    "sass": "1.75.0",
-    "solid-js": "1.8.16",
+    "sass": "1.76.0",
+    "solid-js": "1.8.17",
     "tslib": "2.6.2",
     "typescript": "5.4.5",
-    "vite": "5.2.9",
-    "vite-plugin-dts": "3.8.3",
+    "vite": "5.2.10",
+    "vite-plugin-dts": "3.9.0",
     "vite-plugin-full-reload": "1.1.0",
     "vite-plugin-solid": "2.10.2"
   }

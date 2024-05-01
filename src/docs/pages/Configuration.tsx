@@ -6,7 +6,7 @@ export default function Configuration() {
     {
       name: 'position',
       type: 'string',
-      default: `'up'`,
+      default: `'down'`,
       description: `Specifies the position of the dropdown menu in relation to the select box.<br />
       Possible values are <code>'up'</code> or <code>'down'</code>.`,
     },

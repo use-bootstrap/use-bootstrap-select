@@ -21,8 +21,32 @@ export default function Methods() {
           </thead>
           <tbody>
             <tr>
+              <td><code>show</code></td>
+              <td></td>
+              <td></td>
+              <td>
+                <pre class="mb-0"><code class="language-javascript">example.show()</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td><code>hide</code></td>
+              <td></td>
+              <td></td>
+              <td>
+                <pre class="mb-0"><code class="language-javascript">example.hide()</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td><code>toggle</code></td>
+              <td></td>
+              <td></td>
+              <td>
+                <pre class="mb-0"><code class="language-javascript">example.toggle()</code></pre>
+              </td>
+            </tr>
+            <tr>
               <td><code>getValue</code></td>
-              <td><code>null</code></td>
+              <td></td>
               <td><code>string | string[] | null</code></td>
               <td>
                 <pre class="mb-0"><code class="language-javascript">example.getValue()</code></pre>
@@ -31,7 +55,7 @@ export default function Methods() {
             <tr>
               <td><code>setValue</code></td>
               <td class="text-nowrap"><code>string | string[]</code></td>
-              <td><code>void</code></td>
+              <td></td>
               <td>
                 <pre class="mb-1"><code class="language-javascript">example.setValue('banana')</code></pre>
                 <pre class="mb-0"><code class="language-javascript">example.setValue(['banana', 'grape'])</code></pre>
@@ -40,7 +64,7 @@ export default function Methods() {
             <tr>
               <td><code>addValue</code></td>
               <td class="text-nowrap"><code>string | string[]</code></td>
-              <td><code>void</code></td>
+              <td></td>
               <td>
                 <pre class="mb-1"><code class="language-javascript">example.addValue('banana')</code></pre>
                 <pre class="mb-0"><code class="language-javascript">example.addValue(['banana', 'grape'])</code></pre>
@@ -49,7 +73,7 @@ export default function Methods() {
             <tr>
               <td><code>removeValue</code></td>
               <td class="text-nowrap"><code>string | string[]</code></td>
-              <td><code>void</code></td>
+              <td></td>
               <td>
                 <pre class="mb-1"><code class="language-javascript">example.removeValue('banana')</code></pre>
                 <pre class="mb-0"><code class="language-javascript">example.removeValue(['banana', 'grape'])</code></pre>
@@ -63,7 +87,7 @@ export default function Methods() {
                 <code>selected?: boolean</code><br />
                 <code>position?: "first" | "last"</code>
               </td>
-              <td><code>void</code></td>
+              <td></td>
               <td>
                 <pre class="mb-1"><code class="language-javascript">example.addOption('pineapple')</code></pre>
                 <pre class="mb-0"><code class="language-javascript">example.addOption('pineapple', 'Pineapple', true, 'last')</code></pre>
@@ -71,23 +95,23 @@ export default function Methods() {
             </tr>
             <tr>
               <td><code>clearValue</code></td>
-              <td><code>null</code></td>
-              <td><code>void</code></td>
+              <td></td>
+              <td></td>
               <td>
                 <pre class="mb-0"><code class="language-javascript">example.clearValue()</code></pre>
               </td>
             </tr>
             <tr>
               <td><code>update</code></td>
-              <td><code>null</code></td>
-              <td><code>void</code></td>
+              <td></td>
+              <td></td>
               <td>
                 <pre class="mb-0"><code class="language-javascript">example.update()</code></pre>
               </td>
             </tr>
             <tr>
               <td><code>selectElement</code></td>
-              <td><code>null</code></td>
+              <td></td>
               <td><code>HTMLSelectElement</code></td>
               <td>
                 <pre class="mb-0"><code class="language-javascript">const element = example.selectElement()</code></pre>

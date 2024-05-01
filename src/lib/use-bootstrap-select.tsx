@@ -7,6 +7,9 @@ const name = 'use-bootstrap-select'
 const classFlex = 'd-flex align-items-center gap-1'
 const classTarget = `${name}-target`
 const classWrapper = `${name}-wrapper`
+const eventShow = `${name}:show`
+const eventHide = `${name}:hide`
+const eventToggle = `${name}:toggle`
 const defaultConfig: Config = {
   position: 'down',
   maxHeight: '25rem',
@@ -141,6 +144,18 @@ export default class UseBootstrapSelect {
     this.selectElement.dispatchEvent(new Event('change'))
   }
 
+  show() {
+    this.selectElement.dispatchEvent(new Event(eventShow))
+  }
+
+  hide() {
+    this.selectElement.dispatchEvent(new Event(eventHide))
+  }
+
+  toggle() {
+    this.selectElement.dispatchEvent(new Event(eventToggle))
+  }
+
   private init(): void {
     if (!UseBootstrapSelect.instances.has(this.selectElement)) {
       this.render()
@@ -211,6 +226,9 @@ export default class UseBootstrapSelect {
       this.selectElement.addEventListener('focus', () => {
         inputElement.focus()
       })
+      this.selectElement.addEventListener(eventShow, show)
+      this.selectElement.addEventListener(eventHide, hide)
+      this.selectElement.addEventListener(eventToggle, toggle)
 
       const [focus, setFocus] = createSignal(false)
       const [shown, setShown] = createSignal(false)
