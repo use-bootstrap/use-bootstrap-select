@@ -375,7 +375,7 @@ function LiveDemo() {
 }
 
 function Switcher({ checked, label, setter }: SwitcherProps) {
-  const id = () => label.replace(/[^a-zA-Z0-9]/g, '')
+  const id = () => label.replace(/[^a-z0-9]/gi, '')
   return (
     <div class="form-check form-switch mb-0">
       <input
