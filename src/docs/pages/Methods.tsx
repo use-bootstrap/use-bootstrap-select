@@ -1,5 +1,6 @@
 import { onMount } from 'solid-js'
 import prism from 'prismjs'
+import pkg from '../../../package.json'
 
 export default function Methods() {
   onMount(() => {
@@ -115,6 +116,18 @@ export default function Methods() {
               <td><code>HTMLSelectElement</code></td>
               <td>
                 <pre class="mb-0"><code class="language-javascript">const element = example.selectElement()</code></pre>
+              </td>
+            </tr>
+            <tr>
+              <td><code>clearAll</code></td>
+              <td>
+                <code>HTMLElement | null | undefined</code><br />
+                Default: <code>document</code>
+              </td>
+              <td></td>
+              <td>
+                <pre class="mb-1"><code class="language-javascript">{pkg.libName}.clearAll()</code></pre>
+                <pre class="mb-0"><code class="language-javascript">{pkg.libName}.clearAll(document.getElementById('my-form'))</code></pre>
               </td>
             </tr>
           </tbody>

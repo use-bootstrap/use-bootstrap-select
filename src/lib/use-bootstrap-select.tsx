@@ -605,6 +605,15 @@ export default class UseBootstrapSelect {
     }
     return instance
   }
+
+  static clearAll(scope?: HTMLElement | null) {
+    (scope || document).querySelectorAll('select').forEach((selectElement) => {
+      const instance = UseBootstrapSelect.instances.get(selectElement)
+      if (instance) {
+        instance.clearValue()
+      }
+    })
+  }
 }
 
 function XIcon() {

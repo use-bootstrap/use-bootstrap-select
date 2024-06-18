@@ -1,3 +1,6 @@
+v2.2.0
+  - Added a new static method: `clearAll`.
+
 v2.1.1
   - Fix show method not focusing on input.
 
