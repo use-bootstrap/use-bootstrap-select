@@ -411,6 +411,7 @@ export default class UseBootstrapSelect {
                         const value = activeItem.dataset.value!
                         if (isMultiple()) {
                           this.addValue(value)
+                          setText('')
                         }
                         else {
                           this.setValue(value)
@@ -523,6 +524,7 @@ export default class UseBootstrapSelect {
             onclick={() => {
               if (isMultiple()) {
                 this.addValue(item.value)
+                setText('')
               }
               else {
                 this.setValue(item.value)
