@@ -415,7 +415,6 @@ export default class UseBootstrapSelect {
                         }
                         else {
                           this.setValue(value)
-                          setText('')
                           hide()
                         }
                       }
