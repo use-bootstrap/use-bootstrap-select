@@ -1,3 +1,6 @@
+v2.2.1
+  - Fix search entry is not removed with multiple selection.
+
 v2.2.0
   - Added a new static method: `clearAll`.
 
