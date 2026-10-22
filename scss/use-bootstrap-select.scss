@@ -1,6 +1,59 @@
+// use-bootstrap-select — styles for Bootstrap 6.
+//
+// Custom properties are written without the `bs-` prefix, exactly like
+// Bootstrap 6's own Sass source. When you compile Bootstrap from Sass the
+// output is unprefixed too, so everything lines up. The dist CSS shipped by
+// this package is run through `postcss-prefix-custom-properties` (the same
+// plugin Bootstrap uses) so it matches Bootstrap's prefixed dist CSS.
+
 $name: 'use-bootstrap-select';
 $target: #{$name}-target;
-$duplicate-transform: 'scale(1.1)';
+$wrapper: #{$name}-wrapper;
+
+// Validation state => theme color. Mirrors Bootstrap's `$validation-states`.
+// Override with `@use "use-bootstrap-select/scss/use-bootstrap-select" with ($validation-states: (...))`.
+$validation-states: (
+  'valid': 'success',
+  'invalid': 'danger',
+) !default;
+
+// Mirrors bootstrap/scss/mixins/_focus-ring.scss
+@mixin focus-ring($offset: false, $color: null) {
+  @if $color != null {
+    outline: var(--focus-ring-width) solid #{$color};
+  }
+  @else {
+    outline: var(--focus-ring);
+  }
+  @if $offset {
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+// Mirrors bootstrap/scss/mixins/_form-validation.scss
+@mixin form-validation-state-selector($state) {
+  &.is-#{$state} {
+    @content;
+  }
+
+  @if $state == 'invalid' {
+    @at-root [data-bs-validate] #{&}:user-invalid {
+      @content;
+    }
+  }
+  @else if $state == 'valid' {
+    @at-root [data-bs-validate~='valid'] #{&}:user-valid {
+      @content;
+    }
+  }
+}
+
+// Bootstrap 6 wraps its CSS in cascade layers and reserves a `custom` layer
+// between `components` and `utilities`. Emitting into it lets these rules
+// override Bootstrap's component styles while Bootstrap utilities (e.g.
+// `.position-relative`, `.d-none`) still override them. Load this file after
+// Bootstrap's CSS so the layer order is already declared.
+@layer custom {
 
 // Hide target
 .#{$target} {
@@ -10,6 +63,7 @@ $duplicate-transform: 'scale(1.1)';
 }
 
 .#{$name} {
+  position: relative;
   cursor: default;
 
   .input-wrapper {
@@ -33,116 +87,133 @@ $duplicate-transform: 'scale(1.1)';
     width: 100%;
     background-color: transparent;
     cursor: default;
+
+    &::placeholder {
+      color: var(--control-placeholder-color);
+      opacity: 1;
+    }
+  }
+
+  // Toggle. Bootstrap 6 only styles `:focus-within` and `:disabled` on
+  // `.form-control`; the toggle is a <div>, so mirror those states with classes.
+  .form-control {
+    &.focus {
+      --focus-ring-offset: -1px;
+      @include focus-ring(true);
+    }
+
+    &.disabled {
+      color: var(--control-disabled-color);
+      background-color: var(--control-disabled-bg);
+      border-color: var(--control-disabled-border-color);
+    }
+  }
+
+  // Tags (Bootstrap 6 chips)
+  .chip {
+    --chip-height: 1.5rem;
+    --chip-font-size: var(--control-font-size);
+    height: auto;
+    min-height: var(--chip-height);
+    white-space: normal;
+    overflow-wrap: anywhere;
+    cursor: default;
+  }
+
+  .form-control-sm .chip {
+    --chip-height: 1.25rem;
+    --chip-padding-x: .5rem;
+  }
+
+  .form-control-lg .chip {
+    --chip-height: 1.75rem;
+  }
+
+  // Menu. Positioned statically below/above the toggle (no Floating UI).
+  >.menu {
+    --menu-font-size: var(--btn-input-font-size);
+    inset-inline-start: 0;
+    overflow-y: auto;
+  }
+
+  .form-control-sm+.menu {
+    --menu-font-size: var(--btn-input-sm-font-size);
+  }
+
+  .form-control-lg+.menu {
+    --menu-font-size: var(--btn-input-lg-font-size);
+  }
+
+  &[data-position="down"]>.menu {
+    top: 100%;
+    margin-top: var(--menu-spacer);
+  }
+
+  &[data-position="up"]>.menu {
+    bottom: 100%;
+    margin-bottom: var(--menu-spacer);
+    transform-origin: bottom start;
+  }
+
+  .menu-item {
+    // `.menu-item` is a flex container in Bootstrap 6; items here hold plain
+    // (highlighted) text, so lay them out as blocks and allow wrapping.
+    display: block;
+    white-space: normal;
+
+    &:not(.active):hover {
+      background-color: transparent;
+    }
   }
 
   // Option inside optgroup
   .optgroup-item {
-    padding-left: calc(var(--bs-dropdown-item-padding-x) * 2);
-  }
-
-  // Tags
-  >div>div>.btn {
-    border-radius: calc(#{$input-border-radius} - #{$input-border-width});
-    overflow-wrap: anywhere;
-
-    &.btn-sm {
-      border-radius: calc(#{$input-border-radius-sm} - #{$input-border-width});
-    }
-
-    &.btn-lg {
-      border-radius: calc(#{$input-border-radius-lg} - #{$input-border-width});
-    }
-
-    cursor: default;
-  }
-
-  // Keep the focus style. Source: bootstrap/scss/forms/_form-select.scss:29
-  .form-select.focus {
-    border-color: $form-select-focus-border-color;
-    outline: 0;
-
-    @if $enable-shadows {
-      @include box-shadow($form-select-box-shadow, $form-select-focus-box-shadow);
-    }
-
-    @else {
-      // Avoid using mixin so we can pass custom focus shadow properly
-      box-shadow: $form-select-focus-box-shadow;
-    }
-  }
-
-  // Disabled. Source: bootstrap/scss/forms/_form-select.scss:46
-  .form-select.disabled {
-    color: $form-select-disabled-color;
-    background-color: $form-select-disabled-bg;
-    border-color: $form-select-disabled-border-color;
-  }
-
-  // Dropdown-menu font sizes
-  .form-select-sm+.dropdown-menu {
-    @include font-size($form-select-font-size-sm);
-  }
-
-  .form-select-lg+.dropdown-menu {
-    @include font-size($form-select-font-size-lg);
-  }
-
-  .dropdown-item {
-    white-space: normal;
-  }
-
-  .dropdown-item:not(.active):hover {
-    background-color: transparent;
-  }
-
-  >.dropdown-menu {
-    overflow-y: auto;
+    padding-inline-start: calc(var(--menu-item-padding-x) * 2);
   }
 }
 
-// Source: bootstrap/scss/mixins/_forms.scss:92
-@mixin use-bootstrap-select-form-validation-state($state,
-  $color,
-  $icon,
-  $tooltip-color: color-contrast($color),
-  $tooltip-bg-color: rgba($color, $form-feedback-tooltip-opacity),
-  $focus-box-shadow: 0 0 $input-btn-focus-blur $input-focus-width rgba($color, $input-btn-focus-color-opacity),
-  $border-color: $color) {
-  .form-select {
+// Floating labels (Bootstrap 6 `.form-floating`). The label precedes the
+// <select>, so Bootstrap's `label:has(~ .form-control:is(select))` already
+// floats it. The toggle sits two levels deeper than Bootstrap's
+// `.form-floating > .form-control` selector reaches, so mirror its box here.
+// Only `min-height` is set so a multiple select can grow with its chips.
+.form-floating {
+  > .#{$wrapper} > .#{$name} > .form-control {
+    min-height: var(--form-floating-height);
+    // Longhands so `.form-control-caret`'s inline-end padding (room for the
+    // chevron) survives. Block padding is symmetric here; the extra top
+    // offset for the floated label is applied to the content only, so the
+    // clear button stays centered next to the chevron.
+    padding-block: var(--form-floating-input-padding-b);
+    padding-inline-start: var(--form-floating-padding-x);
+    line-height: var(--form-floating-line-height);
+
+    > .content-wrapper {
+      padding-top: calc(var(--form-floating-input-padding-t) - var(--form-floating-input-padding-b));
+    }
+  }
+
+  // Anchor the label to the top so it stays put when chips wrap onto new rows.
+  > label:has(~ .#{$target}) {
+    align-items: flex-start;
+  }
+}
+
+// Validation. Source: bootstrap/scss/forms/_validation.scss (form-control block)
+@each $state, $theme in $validation-states {
+  .form-control {
     @include form-validation-state-selector($state) {
-      +.#{$name}-wrapper .form-select {
-        border-color: $border-color;
+      +.#{$wrapper} .form-control {
+        --control-border-color: var(--#{$theme}-border);
 
-        @if $enable-validation-icons {
-
-          &:not([multiple]):not([size]),
-          &:not([multiple])[size="1"] {
-            --#{$prefix}form-select-bg-icon: #{escape-svg($icon)};
-            padding-right: $form-select-feedback-icon-padding-end;
-            background-position: $form-select-bg-position, $form-select-feedback-icon-position;
-            background-size: $form-select-bg-size, $form-select-feedback-icon-size;
-          }
-        }
-
-        &.focus {
-          border-color: $border-color;
-
-          @if $enable-shadows {
-            @include box-shadow($form-select-box-shadow, $focus-box-shadow);
-          }
-
-          @else {
-            // Avoid using mixin so we can pass custom focus shadow properly
-            box-shadow: $focus-box-shadow;
-          }
+        &.focus,
+        &:focus-within {
+          --control-border-color: var(--#{$theme}-border);
+          @include focus-ring(true, $color: var(--#{$theme}-focus-ring));
         }
       }
     }
   }
 }
 
-// Source: bootstrap/scss/forms/_validation.css:9
-@each $state,
-$data in $form-validation-states {
-  @include use-bootstrap-select-form-validation-state($state, $data...);
-}
+} // @layer custom

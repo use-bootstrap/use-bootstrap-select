@@ -1,14 +1,4 @@
-@import '../../node_modules/bootstrap/scss/functions';
-
-// any default variable overrides here
-
-@import '../../node_modules/bootstrap/scss/variables';
-@import '../../node_modules/bootstrap/scss/variables-dark';
-
-// any default map overrides here
-
-// @import '../../node_modules/bootstrap/scss/maps';
-@import '../../node_modules/bootstrap/scss/mixins';
+@use 'bootstrap/scss/layout/breakpoints' as *;
 
 body {
   font-family: 'Hind Siliguri', sans-serif;
@@ -35,16 +25,13 @@ body {
 
 pre[class*=language-] {
   font-size: 0.75rem;
-  border-radius: var(--bs-border-radius);
+  border-radius: var(--radius-5);
   background: #2b3035;
   margin: 0;
   margin-bottom: 2rem;
 }
 
-[data-bs-theme="light"] {
-  --bs-link-color: var(--bs-dark);
-}
-
-[data-bs-theme="dark"] {
-  --bs-link-color: var(--bs-light);
+:root {
+  --link-color: var(--fg-body);
+  --link-hover-color: var(--fg-2);
 }

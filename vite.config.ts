@@ -16,5 +16,10 @@ export default defineConfig({
   preview: { port },
   css: {
     devSourcemap: true,
+    preprocessorOptions: {
+      scss: {
+        api: 'modern',
+      },
+    },
   },
 })

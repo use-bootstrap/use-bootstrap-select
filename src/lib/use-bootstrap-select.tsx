@@ -242,10 +242,10 @@ export default class UseBootstrapSelect {
         setShown(false)
       }
       function clearActive() {
-        dropdownItemsWrapper.querySelectorAll('.dropdown-item').forEach(item => item.classList.remove('active'))
+        dropdownItemsWrapper.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'))
       }
       function isIgnoredItem(element: Element) {
-        return element.classList.contains('dropdown-header') || element.classList.contains('disabled')
+        return element.classList.contains('menu-header') || element.classList.contains('disabled')
       }
       function findNextItem(from: Element, direction: 'ArrowUp' | 'ArrowDown') {
         let nextItem = direction === 'ArrowUp' ? from.previousElementSibling : from.nextElementSibling
@@ -255,13 +255,13 @@ export default class UseBootstrapSelect {
         return nextItem
       }
       function findNextDropdownItem(direction: 'ArrowUp' | 'ArrowDown') {
-        const activeItem = dropdownItemsWrapper.querySelector('.dropdown-item.active')
+        const activeItem = dropdownItemsWrapper.querySelector('.menu-item.active')
         let nextItem
         if (activeItem) {
           nextItem = findNextItem(activeItem, direction)
         }
         else {
-          const dropdownItems = dropdownItemsWrapper.querySelectorAll('.dropdown-item')
+          const dropdownItems = dropdownItemsWrapper.querySelectorAll('.menu-item')
           const firstItem = direction === 'ArrowDown' ? dropdownItems[0] : dropdownItems[dropdownItems.length - 1]
           if (firstItem) {
             if (isIgnoredItem(firstItem)) {
@@ -299,7 +299,7 @@ export default class UseBootstrapSelect {
       // Dropdown
       const Dropdown = ({ children }: WithChildren) => {
         return (
-          <div class={`drop${config().position} ${name}`} onmousedown={e => e.preventDefault()}>
+          <div class={name} data-position={config().position} onmousedown={e => e.preventDefault()}>
             {children}
           </div>
         )
@@ -309,13 +309,13 @@ export default class UseBootstrapSelect {
       const DropdownToggle = ({ children }: WithChildren) => {
         return (
           <div
-            class={`${classFlex} ${classList()}`}
+            class={`${classFlex} form-control-caret ${classList()}`}
             classList={{
               focus: focus(),
               disabled: isDisabled(),
             }}
             onmousedown={(e) => {
-              if (!isDisabled() && e.target.getAttribute('role') !== 'button') {
+              if (!isDisabled() && !e.target.closest('button, [role="button"]')) {
                 toggle()
               }
               inputElement.focus()
@@ -329,7 +329,7 @@ export default class UseBootstrapSelect {
       // DropdownToggleContentWrapper
       const DropdownToggleContentWrapper = ({ children }: WithChildren) => {
         return (
-          <div class={`${classFlex} flex-wrap flex-grow-1 w-100 overflow-hidden`}>
+          <div class={`content-wrapper ${classFlex} flex-wrap flex-grow-1 w-100 overflow-hidden`}>
             {children}
           </div>
         )
@@ -348,28 +348,26 @@ export default class UseBootstrapSelect {
       const DropdownToggleContentMultiple = () => {
         return (
           <For each={filter(selected())}>{selected => (
-            <div
-              class="align-items-center gap-1 d-inline-flex py-0 border-0 btn text-bg-secondary"
-              classList={{
-                'disabled': isDisabled(),
-                'btn-sm': classList().includes('form-select-sm'),
-                'btn-lg': classList().includes('form-select-lg'),
-              }}
+            <span
+              class="chip"
+              classList={{ disabled: isDisabled() }}
             >
               {selected.text}
               <Show when={!isDisabled()}>
-                <span
-                  role="button"
-                  class="d-inline-flex"
+                <button
+                  type="button"
+                  class="chip-dismiss"
+                  tabIndex={-1}
+                  aria-label="Remove"
                   onclick={(e) => {
                     e.stopPropagation()
                     this.removeValue(selected.value)
                   }}
                 >
                   <XIcon />
-                </span>
+                </button>
               </Show>
-            </div>
+            </span>
           )}
           </For>
         )
@@ -406,7 +404,7 @@ export default class UseBootstrapSelect {
                 switch (e.key) {
                   case 'Enter':
                     if (shown()) {
-                      const activeItem = dropdownItemsWrapper.querySelector<HTMLDivElement>('.dropdown-item.active')
+                      const activeItem = dropdownItemsWrapper.querySelector<HTMLDivElement>('.menu-item.active')
                       if (activeItem) {
                         const value = activeItem.dataset.value!
                         if (isMultiple()) {
@@ -481,7 +479,7 @@ export default class UseBootstrapSelect {
           <Show when={config().clearable}>
             <span
               role="button"
-              class="ms-auto link-secondary d-inline-flex flex-shrink-0"
+              class="ms-auto fg-2 d-inline-flex flex-shrink-0"
               classList={{ 'd-none': filter(selected()).length < 1 }}
               onclick={(e) => {
                 e.stopPropagation()
@@ -507,7 +505,7 @@ export default class UseBootstrapSelect {
       const DropdownItem = ({ item }: { item: Items[0] }) => {
         return (
           <div
-            class="dropdown-item"
+            class="menu-item"
             data-value={item.value}
             classList={{
               'optgroup-item': item.label !== undefined,
@@ -540,8 +538,7 @@ export default class UseBootstrapSelect {
         return (
           <div
             ref={dropdownMenu}
-            data-bs-popper
-            class="dropdown-menu w-100"
+            class="menu w-100"
             classList={{ show: shown() }}
             style={{
               'max-height': config().maxHeight,
@@ -551,7 +548,7 @@ export default class UseBootstrapSelect {
               <For each={filteredItems()}>{(item, i) => (
                 <>
                   <Show when={item.label && (item.label !== filteredItems()[i() - 1]?.label || i() === 0)}>
-                    <h6 class="dropdown-header">{item.label}</h6>
+                    <h6 class="menu-header">{item.label}</h6>
                   </Show>
                   <DropdownItem item={item} />
                 </>
@@ -560,14 +557,14 @@ export default class UseBootstrapSelect {
             </DropdownItemsWrapper>
             <Show when={config().creatable && config().searchable && filteredItems().length < 1 && text() !== ''}>
               <div
-                class="dropdown-item active"
+                class="menu-item active"
                 innerHTML={config().creatableText.replace('{value}', text())}
                 onclick={create}
               >
               </div>
             </Show>
             <Show when={config().searchable && filteredItems().length < 1}>
-              <div class="dropdown-item pe-none">{config().noResultsText}</div>
+              <div class="menu-item pe-none">{config().noResultsText}</div>
             </Show>
           </div>
         )
@@ -577,7 +574,7 @@ export default class UseBootstrapSelect {
         if (!shown()) {
           setText('')
           clearActive()
-          dropdownItemsWrapper.querySelector('.dropdown-item.selected')?.classList.add('active')
+          dropdownItemsWrapper.querySelector('.menu-item.selected')?.classList.add('active')
         }
       })
 

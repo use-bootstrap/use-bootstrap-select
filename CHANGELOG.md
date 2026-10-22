@@ -1,3 +1,10 @@
+v3.0.0 (Major version, Breaking Changes)
+  - Migrated to Bootstrap 6. Bootstrap 5 is no longer supported.
+  - Use `class="form-control"` on the `<select>` instead of `form-select` (and `form-control-sm` / `form-control-lg` for sizes), following Bootstrap 6.
+  - The dropdown is rendered with Bootstrap 6 `.menu` / `.menu-item` / `.menu-header` classes and selected items in multiple mode use `.chip`.
+  - The Sass source now uses `@use` and no longer depends on Bootstrap's Sass variables; CSS custom properties are unprefixed in Sass output and `bs-` prefixed in `dist/`.
+  - Added support for Bootstrap 6 floating labels: wrap the `<label>` and `<select>` in `.form-floating`.
+
 v2.2.1
   - Fix search entry is not removed with multiple selection.
 

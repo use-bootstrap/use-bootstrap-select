@@ -1,6 +1,5 @@
 /* @refresh reload */
 import { render } from 'solid-js/web'
-import 'bootstrap/js/dist/tab'
 import prism from 'prismjs'
 import App from './App'
 import '@fontsource/hind-siliguri/latin.css'

@@ -19,10 +19,13 @@ const codeCustomizeStructure = `your-project/
 const codeCustomizeA = `// Custom.scss
 // Option A: Include all of Bootstrap
 
-// Include any default variable overrides here (though functions won't be available)
-
-@import "../node_modules/bootstrap/scss/bootstrap";
-@import "../node_modules/${pkg.name}/scss/${pkg.name}";
+// Override any tokens with \`@use ... with ()\`. Only the keys you change need to be listed.
+@use "../node_modules/bootstrap/scss/bootstrap" with (
+  $root-tokens: (
+    --border-radius: .25rem,
+  ),
+);
+@use "../node_modules/${pkg.name}/scss/${pkg.name}";
 
 // Then add additional custom code here`
 
@@ -30,38 +33,37 @@ const codeCustomizeA = `// Custom.scss
 const codeCustomizeB = `// Custom.scss
 // Option B: Include parts of Bootstrap
 
-// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
-@import "../node_modules/bootstrap/scss/functions";
+// 1. Include root first (configuration, colors, tokens, and CSS layers)
+@use "../node_modules/bootstrap/scss/root";
 
-// 2. Include any default variable overrides here
+// 2. Include any other partials as needed
+@use "../node_modules/bootstrap/scss/content";
+@use "../node_modules/bootstrap/scss/layout";
+@use "../node_modules/bootstrap/scss/forms";
+@use "../node_modules/bootstrap/scss/buttons";
 
-// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/variables-dark";
+// 3. Components (${pkg.name} needs forms, menu and chip)
+@use "../node_modules/bootstrap/scss/menu";
+@use "../node_modules/bootstrap/scss/chip";
+// ...
 
-// 4. Include any default map overrides here
+// 4. Helpers and utilities
+@use "../node_modules/bootstrap/scss/helpers";
+@use "../node_modules/bootstrap/scss/utilities/api";
 
-// 5. Include remainder of required parts
-@import "../node_modules/bootstrap/scss/maps";
-@import "../node_modules/bootstrap/scss/mixins";
-@import "../node_modules/bootstrap/scss/root";
+// 5. Include ${pkg.name}
+@use "../node_modules/${pkg.name}/scss/${pkg.name}";
 
-// 6. Optionally include any other parts as needed
-@import "../node_modules/bootstrap/scss/utilities";
-@import "../node_modules/bootstrap/scss/reboot";
-@import "../node_modules/bootstrap/scss/type";
-@import "../node_modules/bootstrap/scss/images";
-@import "../node_modules/bootstrap/scss/containers";
-@import "../node_modules/bootstrap/scss/grid";
-@import "../node_modules/bootstrap/scss/helpers";
+// 6. Add additional custom code here`
 
-// 7. Optionally include utilities API last to generate classes based on the Sass map in "_utilities.scss"
-@import "../node_modules/bootstrap/scss/utilities/api";
-
-// 8. Include ${pkg.name}
-@import "../node_modules/${pkg.name}/scss/${pkg.name}";
-
-// 9. Add additional custom code here`
+// codeCustomizeStates
+const codeCustomizeStates = `@use "../node_modules/${pkg.name}/scss/${pkg.name}" with (
+  $validation-states: (
+    "valid": "success",
+    "invalid": "danger",
+    "warning": "warning",
+  ),
+);`
 
 export default function Customize() {
   onMount(() => {
@@ -73,11 +75,20 @@ export default function Customize() {
       <h2 class="fw-bold mb-4">Customize</h2>
       <p>Assuming you're using a package manager like npm, you’ll have a file structure that looks like this:</p>
       <pre><code class="language-bash">{codeCustomizeStructure}</code></pre>
-      <p>In your <code>custom.scss</code>, you’ll import Bootstrap’s source Sass files. You have two options: include all of Bootstrap, or pick the parts you need.</p>
+      <p>In your <code>custom.scss</code>, you’ll load Bootstrap’s source Sass files with <code>@use</code>. You have two options: include all of Bootstrap, or pick the parts you need.</p>
       <pre><code class="language-css">{codeCustomizeA}</code></pre>
       <pre><code class="language-css">{codeCustomizeB}</code></pre>
-      <p>By default, <code>{pkg.name}</code> inherits its style from default bootstrap style, so anything you change in bootstrap automatically changes <code>{pkg.name}</code> style as well.</p>
-      <p>Read more about customize bootstrap styles at <a class="text-break" href="https://getbootstrap.com/docs/5.3/customize/sass/" target="_blank">https://getbootstrap.com/docs/5.3/customize/sass/</a>.</p>
+      <p>By default, <code>{pkg.name}</code> inherits its style from Bootstrap’s CSS variables (form controls, menus and chips), so anything you change in Bootstrap automatically changes <code>{pkg.name}</code> style as well.</p>
+      <p>The validation states that <code>{pkg.name}</code> styles can be configured the same way as Bootstrap’s <code>$validation-states</code>:</p>
+      <pre><code class="language-css">{codeCustomizeStates}</code></pre>
+      <p>
+        Bootstrap 6 writes CSS custom properties without the <code>bs-</code> prefix in its Sass source and adds the prefix at build time with PostCSS.
+        {' '}
+        <code>{pkg.name}</code> follows the same convention: its Sass output is unprefixed (matching Bootstrap compiled from Sass), while the CSS in <code>dist/</code> is prefixed (matching <code>bootstrap.min.css</code>).
+        {' '}
+        If you prefix your compiled Bootstrap CSS with <code>postcss-prefix-custom-properties</code>, run <code>{pkg.name}</code> through it as well.
+      </p>
+      <p>Read more about customizing Bootstrap styles at <a class="text-break" href="https://getbootstrap.com/docs/6.0/customize/sass/" target="_blank">https://getbootstrap.com/docs/6.0/customize/sass/</a>.</p>
     </div>
   )
 }

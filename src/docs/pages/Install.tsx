@@ -25,7 +25,7 @@ import ${pkg.libName} from '${pkg.name}'`
     <script src="node_modules/${pkg.name}/dist/${pkg.name}.min.js"></script>
   </head>
   <body>
-    <select id="example" class="form-select">
+    <select id="example" class="form-control">
       <option value="apple">Apple</option>
       <option value="banana">Banana</option>
       <option value="grape">Grape</option>
@@ -54,7 +54,7 @@ ${cdnJs}`
     ${cdnJs}
   </head>
   <body>
-    <select id="example" class="form-select">
+    <select id="example" class="form-control">
       <option value="apple">Apple</option>
       <option value="banana">Banana</option>
       <option value="grape">Grape</option>
@@ -92,7 +92,7 @@ ${cdnJs}`
       <h5>Install from cdn:</h5>
       <ol>
         <li>
-          <p>Add the following script in the <code>&lt;head&gt;</code> tag of your HTML:</p>
+          <p>Add the following script in the <code>&lt;head&gt;</code> tag of your HTML, after Bootstrap’s CSS (the styles use Bootstrap 6’s <code>custom</code> cascade layer, which Bootstrap declares):</p>
           <pre><code class="language-html">{codeCdn}</code></pre>
           <p>Example:</p>
           <pre><code class="language-html">{codeCdnExample}</code></pre>

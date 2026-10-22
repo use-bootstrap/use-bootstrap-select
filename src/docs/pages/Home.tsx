@@ -32,7 +32,7 @@ export default function Home() {
       </div>
       <hr />
       <h4 class="fw-bold">Features</h4>
-      <ul class="text-body-secondary">
+      <ul class="fg-2">
         <li><b>Tag-Like Appearance</b>: Displays selected choices like tags in multiple mode.</li>
         <li><b>Clearable</b>: Enables users to easily remove selected options.</li>
         <li><b>Searchable</b>: Allows users to search and find options easily.</li>
@@ -42,7 +42,7 @@ export default function Home() {
       </ul>
       <hr />
       <h4 class="fw-bold">Repository</h4>
-      <a class="link-body-emphasis" href={pkg.repository} target="_blank">{pkg.repository}</a>
+      <a class="fg-body" href={pkg.repository} target="_blank">{pkg.repository}</a>
       <hr />
       <h4 class="fw-bold">License</h4>
       {pkg.license}

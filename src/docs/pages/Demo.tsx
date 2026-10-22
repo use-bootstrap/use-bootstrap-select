@@ -2,7 +2,6 @@
 import type { Accessor, JSX, Setter } from 'solid-js'
 import { For, Show, createEffect, createSignal, on, onMount } from 'solid-js'
 import prism from 'prismjs'
-import 'bootstrap/js/dist/dropdown'
 import { format } from 'prettier'
 import htmlParser from 'prettier/plugins/html'
 import pkg from '../../../package.json'
@@ -37,6 +36,7 @@ function LiveDemo() {
   const [createPosition, setCreatePosition] = createSignal<'first' | 'last'>('first')
   const [validated, setValidated] = createSignal(false)
   const [validationState, setValidationState] = createSignal<'is-valid' | 'is-invalid'>('is-valid')
+  const [floating, setFloating] = createSignal(false)
 
   const fruit = () => ([
     {
@@ -129,6 +129,7 @@ function LiveDemo() {
         ' data-max-height="25rem"',
         ' data-no-results-text="No results found"',
         ' data-creatable-text="Add <b>{value}</b>..."',
+        ' data-creatable-text="Add &lt;b&gt;{value}&lt;/b&gt;..."',
         ' data-create-position="first"',
         ' data-clearable="false"',
         ' data-searchable="false"',
@@ -136,6 +137,9 @@ function LiveDemo() {
       ], '', outerHTML)
       outerHTML = outerHTML.replace('multiple=""', 'multiple')
       outerHTML = outerHTML.replaceAll('disabled=""', 'disabled')
+      if (floating()) {
+        outerHTML = `<div class="form-floating"><label for="example">Example label</label>${outerHTML}</div>`
+      }
       outerHTML = outerHTML + codeDemo.replace('<', '\n\n<')
       outerHTML = await format(outerHTML, { parser: 'html', plugins: [htmlParser] })
       outerHTML = escapeHtml(outerHTML)
@@ -182,13 +186,13 @@ function LiveDemo() {
     }
   })
 
-  createEffect(on([size, position, maxHeight, optgroup, multiple, disabled, placeholder, clearable, searchable, noResultsText, creatable, creatableText, createPosition, validated, validationState], () => {
+  createEffect(on([size, position, maxHeight, optgroup, multiple, disabled, placeholder, clearable, searchable, noResultsText, creatable, creatableText, createPosition, validated, validationState, floating], () => {
     setTimeout(() => {
       generateCode()
     }, 150)
   }))
 
-  createEffect(on([size, position, maxHeight, optgroup, multiple, disabled, placeholder, clearable, searchable, noResultsText, creatable, creatableText, createPosition, validated, validationState], (next, prev) => {
+  createEffect(on([size, position, maxHeight, optgroup, multiple, disabled, placeholder, clearable, searchable, noResultsText, creatable, creatableText, createPosition, validated, validationState, floating], (next, prev) => {
     setTimeout(() => {
       if (target) {
         const prevPlaceholder = !prev ? false : prev[6]
@@ -207,13 +211,13 @@ function LiveDemo() {
     <div class="card mb-4">
       <div class="card-body">
         <div class="row g-4">
-          <div class="col-12 col-lg-8 col-xl-9">
-            <div style="max-width: 25rem" class="mx-auto">
-              <label for="example" class="form-label fw-bold">Example label</label>
+          <div class="col-12 lg:col-8 xl:col-9">
+            <div style="max-width: 25rem" class="mx-auto" classList={{ 'form-floating': floating() }}>
+              <label for="example" classList={{ 'form-label fw-bold': !floating() }}>Example label</label>
               <select
                 id="example"
                 ref={target}
-                class="form-select"
+                class="form-control"
                 multiple={multiple()}
                 disabled={disabled()}
                 data-position={position()}
@@ -225,8 +229,8 @@ function LiveDemo() {
                 data-creatable-text={creatable() ? creatableText() : 'Add <b>{value}</b>...'}
                 data-create-position={creatable() ? createPosition() : 'first'}
                 classList={{
-                  'form-select-sm': size() === 'sm',
-                  'form-select-lg': size() === 'lg',
+                  'form-control-sm': size() === 'sm',
+                  'form-control-lg': size() === 'lg',
                   'is-valid': validated() && validationState() === 'is-valid',
                   'is-invalid': validated() && validationState() === 'is-invalid',
                 }}
@@ -291,38 +295,39 @@ function LiveDemo() {
               </div>
             </div>
           </div>
-          <div class="col-12 col-lg-4 col-xl-3">
+          <div class="col-12 lg:col-4 xl:col-3">
             <div class="vstack gap-2">
-              <div>
-                <label class="form-label mb-0 fw-medium d-block">Size</label>
-                <div class="form-check form-check-inline">
-                  <input checked={size() === ''} oninput={e => setSize(e.target.value as any)} class="form-check-input" type="radio" name="size" id="sizeDefault" value="" />
-                  <label class="form-check-label" for="sizeDefault">Default</label>
+              <div class="d-flex flex-wrap gap-3">
+                <label class="form-label mb-0 fw-medium w-100">Size</label>
+                <div class="form-field">
+                  <input checked={size() === ''} oninput={e => setSize(e.target.value as any)} class="radio" type="radio" name="size" id="sizeDefault" value="" />
+                  <label for="sizeDefault">Default</label>
                 </div>
-                <div class="form-check form-check-inline">
-                  <input checked={size() === 'sm'} oninput={e => setSize(e.target.value as any)} class="form-check-input" type="radio" name="size" id="sizeSm" value="sm" />
-                  <label class="form-check-label" for="sizeSm">Sm</label>
+                <div class="form-field">
+                  <input checked={size() === 'sm'} oninput={e => setSize(e.target.value as any)} class="radio" type="radio" name="size" id="sizeSm" value="sm" />
+                  <label for="sizeSm">Sm</label>
                 </div>
-                <div class="form-check form-check-inline">
-                  <input checked={size() === 'lg'} oninput={e => setSize(e.target.value as any)} class="form-check-input" type="radio" name="size" id="sizeLg" value="lg" />
-                  <label class="form-check-label" for="sizeLg">Lg</label>
+                <div class="form-field">
+                  <input checked={size() === 'lg'} oninput={e => setSize(e.target.value as any)} class="radio" type="radio" name="size" id="sizeLg" value="lg" />
+                  <label for="sizeLg">Lg</label>
                 </div>
               </div>
-              <div>
-                <label class="form-label mb-0 fw-medium d-block">Dropdown menu position</label>
-                <div class="form-check form-check-inline">
-                  <input checked={position() === 'down'} oninput={e => setPosition(e.target.value as any)} class="form-check-input" type="radio" name="position" id="positionDown" value="down" />
-                  <label class="form-check-label" for="positionDown">Down</label>
+              <div class="d-flex flex-wrap gap-3">
+                <label class="form-label mb-0 fw-medium w-100">Dropdown menu position</label>
+                <div class="form-field">
+                  <input checked={position() === 'down'} oninput={e => setPosition(e.target.value as any)} class="radio" type="radio" name="position" id="positionDown" value="down" />
+                  <label for="positionDown">Down</label>
                 </div>
-                <div class="form-check form-check-inline">
-                  <input checked={position() === 'up'} oninput={e => setPosition(e.target.value as any)} class="form-check-input" type="radio" name="position" id="positionUp" value="up" />
-                  <label class="form-check-label" for="positionUp">Up</label>
+                <div class="form-field">
+                  <input checked={position() === 'up'} oninput={e => setPosition(e.target.value as any)} class="radio" type="radio" name="position" id="positionUp" value="up" />
+                  <label for="positionUp">Up</label>
                 </div>
               </div>
               <div>
                 <label for="maxHeight" class="form-label mb-0 fw-medium">maxHeight</label>
                 <input value={maxHeight()} oninput={e => setMaxHeight(e.target.value.trim())} type="text" class="form-control form-control-sm" id="maxHeight" autocomplete="off" />
               </div>
+              <Switcher label="Floating label" checked={floating} setter={setFloating} />
               <Switcher label="Optgroup" checked={optgroup} setter={setOptgroup} />
               <Switcher label="Multiple" checked={multiple} setter={setMultiple} />
               <Switcher label="Disabled" checked={disabled} setter={setDisabled} />
@@ -341,28 +346,28 @@ function LiveDemo() {
                   <label for="creatableText" class="form-label mb-0 fw-medium">creatableText</label>
                   <input value={creatableText()} oninput={e => setCreatableText(e.target.value.trim())} type="text" class="form-control form-control-sm" id="creatableText" autocomplete="off" />
                 </div>
-                <div>
-                  <label class="form-label mb-0 fw-medium d-block">createPosition</label>
-                  <div class="form-check form-check-inline">
-                    <input checked={createPosition() === 'first'} oninput={e => setCreatePosition(e.target.value as any)} class="form-check-input" type="radio" name="createPosition" id="createPositionFirst" value="first" />
-                    <label class="form-check-label" for="createPositionFirst">First</label>
+                <div class="d-flex flex-wrap gap-3">
+                  <label class="form-label mb-0 fw-medium w-100">createPosition</label>
+                  <div class="form-field">
+                    <input checked={createPosition() === 'first'} oninput={e => setCreatePosition(e.target.value as any)} class="radio" type="radio" name="createPosition" id="createPositionFirst" value="first" />
+                    <label for="createPositionFirst">First</label>
                   </div>
-                  <div class="form-check form-check-inline">
-                    <input checked={createPosition() === 'last'} oninput={e => setCreatePosition(e.target.value as any)} class="form-check-input" type="radio" name="createPosition" id="createPositionLast" value="last" />
-                    <label class="form-check-label" for="createPositionLast">Last</label>
+                  <div class="form-field">
+                    <input checked={createPosition() === 'last'} oninput={e => setCreatePosition(e.target.value as any)} class="radio" type="radio" name="createPosition" id="createPositionLast" value="last" />
+                    <label for="createPositionLast">Last</label>
                   </div>
                 </div>
               </Show>
               <Switcher label="Validated" checked={validated} setter={setValidated} />
               <Show when={validated()}>
-                <div>
-                  <div class="form-check form-check-inline">
-                    <input checked={validationState() === 'is-valid'} oninput={e => setValidationState(e.target.value as any)} class="form-check-input" type="radio" name="validationState" id="validationStateValid" value="is-valid" />
-                    <label class="form-check-label" for="validationStateValid">Valid</label>
+                <div class="d-flex flex-wrap gap-3">
+                  <div class="form-field">
+                    <input checked={validationState() === 'is-valid'} oninput={e => setValidationState(e.target.value as any)} class="radio" type="radio" name="validationState" id="validationStateValid" value="is-valid" />
+                    <label for="validationStateValid">Valid</label>
                   </div>
-                  <div class="form-check form-check-inline">
-                    <input checked={validationState() === 'is-invalid'} oninput={e => setValidationState(e.target.value as any)} class="form-check-input" type="radio" name="validationState" id="validationStateInvalid" value="is-invalid" />
-                    <label class="form-check-label" for="validationStateInvalid">Invalid</label>
+                  <div class="form-field">
+                    <input checked={validationState() === 'is-invalid'} oninput={e => setValidationState(e.target.value as any)} class="radio" type="radio" name="validationState" id="validationStateInvalid" value="is-invalid" />
+                    <label for="validationStateInvalid">Invalid</label>
                   </div>
                 </div>
               </Show>
@@ -377,16 +382,17 @@ function LiveDemo() {
 function Switcher({ checked, label, setter }: SwitcherProps) {
   const id = () => label.replace(/[^a-z0-9]/gi, '')
   return (
-    <div class="form-check form-switch mb-0">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id={`check${id()}`}
-        checked={checked()}
-        onchange={() => setter(value => !value)}
-      />
-      <label class="form-check-label" for={`check${id()}`}>{label}</label>
+    <div class="form-field">
+      <span class="switch">
+        <input
+          type="checkbox"
+          role="switch"
+          id={`check${id()}`}
+          checked={checked()}
+          onchange={() => setter(value => !value)}
+        />
+      </span>
+      <label for={`check${id()}`}>{label}</label>
     </div>
   )
 }
@@ -394,11 +400,11 @@ function Switcher({ checked, label, setter }: SwitcherProps) {
 function ButtonMethod({ children, onclick }: { children: JSX.Element, onclick: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent> }) {
   return (
     <button
-      class="btn btn-sm btn-light"
+      class="btn btn-sm btn-subtle theme-secondary"
       type="button"
       onclick={onclick}
     >
-      <code class="text-success">{children}</code>
+      <code class="fg-success">{children}</code>
     </button>
   )
 }
